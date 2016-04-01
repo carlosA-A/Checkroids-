@@ -11,6 +11,7 @@ using namespace std;
 
 int main() {
 
+	cout << "IT IS WORKING!" << endl;
 	int board[8][8];
 	for (int spot = 0;  spot < 8; ++ spot) {
 			for (int cell = 0; cell < 8; ++ cell) {
