@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : Checkers.cpp
-// Author      : 
+// Author      :
 // Version     :
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
@@ -10,6 +10,8 @@
 using namespace std;
 
 int main() {
+
+	std::cout << "hello world" << std::endl;
 
 	int board[8][8];
 	for (int spot = 0;  spot < 8; ++ spot) {
