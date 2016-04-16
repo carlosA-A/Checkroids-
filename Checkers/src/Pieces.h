@@ -44,10 +44,11 @@ class Piece{
 
 };
 class Normal: public Piece{
+	bool exists;
 
-	Normal(int positionX, int positionY, bool isWhite):Piece(positionX,positionY,isWhite)
+	Normal(bool exists,int positionX, int positionY, bool isWhite):Piece(positionX,positionY,isWhite)
 	{
-
+		this->exists = exists;
 	}
 	bool isMoveLegal(int x, int y, int currentX, int currentY);
 };
