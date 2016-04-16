@@ -70,3 +70,29 @@ bool Normal::isMoveLegal(int x, int y, int currentX, int currentY){
 
   return isLegal;
 }
+
+
+
+bool King::isMoveLegal(int x, int y, int currentX, int currentY){
+
+  bool isLegal = false;
+  move[0] = x;
+  move[1] = y;
+
+  int moveTo1 = -1;   //If the piece is black then the move will substract 1 to move forward
+  int moveTo2 = -2;   //Jump will take 2 from the row
+
+  //Checks if diagonal forward or backward move trying to be made is legal
+  if((currentX + moveTo1 == move[0] ||currentX - moveTo1 == move[0])&&((currentY + moveTo1 == move[1])||(currentY - moveTo1 == move[1]))){
+
+    isLegal = true;
+
+  }
+  else if ((currentX + moveTo2 == move[0] || currentX - moveTo2 == move[0])&&((currentY + moveTo1 == move[1])||(currentY - moveTo1 == move[1]))){
+
+    isLegal = true;
+
+  }
+
+  return isLegal;
+}
