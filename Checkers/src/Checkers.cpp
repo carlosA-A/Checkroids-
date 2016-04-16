@@ -7,6 +7,8 @@
 //============================================================================
 
 #include <iostream>
+#include "Pieces.cpp"
+
 using namespace std;
 
 int main() {

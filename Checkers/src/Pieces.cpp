@@ -1,5 +1,5 @@
 using namespace std;
-#include "Piece.h"
+#include "Pieces.h"
 //-----------------------------PIECE SETTERS AND GETTERS--------------------
 int* Piece::getPosition(){
 
@@ -42,7 +42,7 @@ void Piece::setWhite(bool isWhite){
 
 //-----------------------------Normal Piece setup--------------------
 
-bool Normal::isMoveLegal(int x, int y, int currentX, int currentY){
+//bool Normal::isMoveLegal(int x, int y, int currentX, int currentY){
 
 
-}
+//}
