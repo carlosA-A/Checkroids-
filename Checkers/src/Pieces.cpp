@@ -1,21 +1,48 @@
 using namespace std;
 #include "Piece.h"
-
-Piece::getPosition(){
+//-----------------------------PIECE SETTERS AND GETTERS--------------------
+int* Piece::getPosition(){
 
   return position;
 }
 
-Piece::getDead(){
+int Piece::getDead(){
   return countDeadPieces;
 }
-Piece::getWhite(){
+bool Piece::getWhite(){
 
   return isWhite;
 }
+int Piece::getType(){
 
-Piece::setPosition(int x, int y){
+  return type;
+}
+bool Piece::getDidMove(){
+
+
+  return didMove;
+}
+void Piece::setPosition(int x, int y){
 
   position[0] = x;
   position[1] = y;
+}
+
+void Piece::setDead(bool isDead){
+  this->dead = isDead;
+}
+void Piece::setType(int type){
+
+  this-> type = type;
+}
+void Piece::setWhite(bool isWhite){
+
+  this-> isWhite = isWhite;
+}
+
+//-----------------------------Normal Piece setup--------------------
+
+bool Normal::isMoveLegal(int x, int y, int currentX, int currentY){
+
+
 }

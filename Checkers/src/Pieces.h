@@ -21,6 +21,7 @@ class Piece{
 		int whiteScore;
 		int countDeadPieces;
 		bool firstMoved;
+		bool didMove;  //Checks is the piece has already moved
 
 	public:
 		Piece(){};
@@ -38,9 +39,15 @@ class Piece{
 		int getX();
 		int getY();
 		bool getWhite();		//Returns true if piece is white else it's black
-		bool getDead();		//Returns the number of dead pieces
+		void setWhite();
+		int getDead();		//Returns the number of dead pieces
+	 	void setDead();
+		int getType(); 	//Returns type of piece normal or King
+		void setType();
+		int set
 		virtual bool isMoveLegal(int x, int y, int currentX, int currentY);  //checks where piece is and wants to go, if move is legal return true
-		virtual void upgradePiece;
+		virtual void upgradePiece();
+		virtual bool getDidMove();
 
 
 };
