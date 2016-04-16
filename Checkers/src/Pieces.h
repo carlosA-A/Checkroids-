@@ -41,7 +41,7 @@ class Piece{
 		bool getWhite();		//Returns true if piece is white else it's black
 		void setWhite(bool isWhite);
 		int getDead();		//Returns the number of dead pieces
-	 	void setDead(bool isDead);
+	 	void setDead();
 		int getType(); 	//Returns type of piece normal or King
 		void setType(int type);
 		virtual bool isMoveLegal(int x, int y, int currentX, int currentY);  //checks where piece is and wants to go, if move is legal return true
