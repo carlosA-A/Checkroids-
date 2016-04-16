@@ -9,7 +9,6 @@ using namespace std;
 class Piece{
 
 	protected:
-		int type;  //The type of piece being used, normal or King
 		int move[2];  		//Where the piece is trying to move
 		int position[2];					// x and y coordinates of piece are stored in array
 		int destination[2];
@@ -23,9 +22,8 @@ class Piece{
 
 	public:
 		Piece(){};
-		Piece(int positionX,int positionY, bool isWhite,int type )
+		Piece(int positionX,int positionY, bool isWhite)
 		{
-			this -> type = type;
 			this -> position[0] = positionX;
 			this -> position[1] = positionY;
 			this -> isWhite = isWhite;
@@ -40,18 +38,17 @@ class Piece{
 		void setWhite(bool isWhite);
 		int getDead();		//Returns the number of dead pieces
 	 	void setDead();		//Returns true if piece has been destroyed
-		int getType(); 	//Returns type of piece normal or King
-		void setType(int type);
 		virtual bool isMoveLegal(int x, int y, int currentX, int currentY)=0;  //checks where piece is and wants to go, if move is legal return true
 		virtual bool getDidMove()=0;
 
 
 };
 class Normal: public Piece{
+	bool exists;
 
-	Normal(int positionX, int positionY, bool isWhite, int type):Piece(positionX,positionY,isWhite,type)
+	Normal(bool exists,int positionX, int positionY, bool isWhite):Piece(positionX,positionY,isWhite)
 	{
-
+		this->exists = exists;
 	}
 	bool isMoveLegal(int x, int y, int currentX, int currentY);
 };
