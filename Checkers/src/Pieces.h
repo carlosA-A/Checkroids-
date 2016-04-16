@@ -11,10 +11,11 @@ using namespace std;
 class Piece{
 
 	protected:
-
+		int type;  //The type of piece being used, normal or King
+		int move[2];  		//Where the piece is trying to move
 		int position[2];					// x and y coordinates of piece are stored in array
 		int destination[2];
-		bool white;					//black or white piece
+		bool isWhite;					//black or white piece
 		bool dead;					//still in play on board
 		int blackScore;
 		int whiteScore;
@@ -23,17 +24,31 @@ class Piece{
 
 	public:
 		Piece(){};
+		Piece(int positionX,int positionY, bool isWhite,int type )
+		{
+			this -> type = type;
+			this -> position[0] = positionX;
+			this -> position[1] = positionY;
+			this -> isWhite = isWhite;
+
+
+		}
 
 		int getX();
-		int getY();
-		bool getWhite();
-		bool getDead();
-		virtual bool isMoveLegal();
+		int getY();				
+		bool getWhite();		//Returns true if piece is white else it's black
+		bool getDead();		//Returns the number of dead pieces
+		virtual bool isMoveLegal(int x, int y, int currentX, int currentY);  //checks where piece is and wants to go, if move is legal return true
 
 
 
 };
 class Normal: public Piece{
+
+	Normal(int positionX, int positionY, bool isWhite, int type):Piece(positionX,positionY,isWhite,type)
+	{
+
+	}
 
 	bool isMoveLegal();
 }
