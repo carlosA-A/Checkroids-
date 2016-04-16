@@ -33,13 +33,14 @@ class Piece{
 
 
 		}
-
+		int* getPosition();
+		void setPosition(int x, int y);
 		int getX();
-		int getY();				
+		int getY();
 		bool getWhite();		//Returns true if piece is white else it's black
 		bool getDead();		//Returns the number of dead pieces
 		virtual bool isMoveLegal(int x, int y, int currentX, int currentY);  //checks where piece is and wants to go, if move is legal return true
-
+		virtual void upgradePiece;
 
 
 };
@@ -49,13 +50,13 @@ class Normal: public Piece{
 	{
 
 	}
-
-	bool isMoveLegal();
+	void upgradePiece();
+	bool isMoveLegal(int x, int y, int currentX, int currentY);
 }
 
 class King: public Piece{
 
-	bool isMoveLegal();
+	bool isMoveLegal(int x, int y, int currentX, int currentY);
 
 }
 
