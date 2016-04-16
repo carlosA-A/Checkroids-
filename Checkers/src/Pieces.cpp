@@ -72,7 +72,6 @@ bool Normal::isMoveLegal(int x, int y, int currentX, int currentY){
 }
 
 
-
 bool King::isMoveLegal(int x, int y, int currentX, int currentY){
 
   bool isLegal = false;

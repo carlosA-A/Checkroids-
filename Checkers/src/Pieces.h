@@ -1,8 +1,6 @@
 
-
-
-#ifndef PIECE_H_
-#define PIECE_H_
+#ifndef PIECES_H_
+#define PIECES_H_
 
 #include <string>
 
@@ -44,9 +42,8 @@ class Piece{
 	 	void setDead();		//Returns true if piece has been destroyed
 		int getType(); 	//Returns type of piece normal or King
 		void setType(int type);
-		virtual bool isMoveLegal(int x, int y, int currentX, int currentY);  //checks where piece is and wants to go, if move is legal return true
-		virtual void upgradePiece();
-		virtual bool getDidMove();
+		virtual bool isMoveLegal(int x, int y, int currentX, int currentY)=0;  //checks where piece is and wants to go, if move is legal return true
+		virtual bool getDidMove()=0;
 
 
 };
@@ -56,7 +53,6 @@ class Normal: public Piece{
 	{
 
 	}
-	void upgradePiece();
 	bool isMoveLegal(int x, int y, int currentX, int currentY);
 };
 
@@ -66,4 +62,4 @@ class King: public Piece{
 
 };
 
-#endif /* PIECE_H_ */
+#endif /* PIECES_H_ */
