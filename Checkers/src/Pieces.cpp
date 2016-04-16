@@ -14,10 +14,7 @@ bool Piece::getWhite(){
 
   return isWhite;
 }
-int Piece::getType(){
 
-  return type;
-}
 bool Piece::getDidMove(){
 
 
@@ -31,10 +28,6 @@ void Piece::setPosition(int x, int y){
 
 void Piece::setDead(){
   this->dead = true;
-}
-void Piece::setType(int type){
-
-  this-> type = type;
 }
 void Piece::setWhite(bool isWhite){
 
