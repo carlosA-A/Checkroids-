@@ -55,7 +55,8 @@ bool Normal::isMoveLegal(int x, int y, int currentX, int currentY){
     isLegal = true;
 
   }
-  else if ((currentX + moveTo2 == move[0])&&((currentY + moveTo1 == move[1])||(currentY - moveTo1 == move[1]))){
+  //checks if jump is legal
+  else if ((currentX + moveTo2 == move[0])&&((currentY + moveTo2 == move[1])||(currentY - moveTo2 == move[1]) || (currentY == move[1]))){
 
     isLegal = true;
 
