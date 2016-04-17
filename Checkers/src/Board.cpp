@@ -147,20 +147,78 @@ void Board::movePiece(){
     int chosenPieceY;
     int chosenDestinationX;
     int chosenDestinationY;
-    turnWhite = false;
+    bool canContinue = false;
+    isWhite = false;      //Blacks start
 
-    cout<< "Which piece would you like to move?(w White,b Black)"<<endl;
-    cout<< "Enter X coodinate"<<endl;
+    cout<< "Which piece would you like to move?(w White,b Black)"<<endl
+    cout<< "Enter X coodinate"<<endl
     cin>>chosenPieceX;
-    cout<< "Enter Y coodinate"<<endl;
-    cin>>chosenPieceY;
-    if((chosenPieceX < 1 || chosenPieceX > 8)||(chosenPieceY < 1 || chosenPieceY > 8)){
+    cout<< "Enter Y coodinate"<<endl
+    cin>>chosenPieceY
 
-      std::cout << "Position doesn't exist" << std::endl;
+    if(positionExists(chosenPieceX,chosenPieceY){
+      cout<< "Where would you like to move?(o Empty)"<<endl;
+      cout<< "Enter X coodinate"<<endl;
+      cin>>chosenDestinationX;
+      cout<< "Enter Y coodinate"<<endl;
+      cin>>chosenDestinationY;
+      canContinue = positionExists(chosenPieceX,chosenPieceY,chosenDestinationX,chosenDestinationY);
+    }
+
+
+}
+bool Board::position_Piece_Exist(int x, int y){
+  bool posExists = true;
+
+  if((x < 1 || x > 8)&&(y < 1 || y > 8)){
+
+    std::cout << "Position doesn't exist" << std::endl;
+    posExists = false;
+  }
+  else{
+    int arrayPosX = x-1;   //-1 to find in array
+    int arrayPosY = y-1;
+    //Check if at position there exists a piece and is same color as player
+    if(pieceArray[x][y]-> exist == true && pieceArray[x][y]->isWhite == isWhite){
+      continue;
     }
     else{
-      std::cout << "OK" << std::endl;
+      posExists = false;
     }
 
+  }
+
+
+  return posExists;
+
+}
+bool Board::positionExists(int currentX, int currentY,int movingToX,int movingToY){
+  bool posExists = true;
+  //Check if pos exists
+  if((x < 1 || x > 8)&&(y < 1 || y > 8)){
+
+    std::cout << "Position doesn't exist" << std::endl;
+    posExists = false;
+  }
+  //Check if piece can move there
+  else{
+    //Current x y pos
+    int arrayPosX = currentX-1;   //-1 to find in array
+    int arrayPosY = currentY-1;
+    //Position trying to move to
+    int moveToX = movingToX -1;
+    int MoveToY = movingToY-1;
+
+    if(pieceArray[arrayPosX][arrayPosY]->isMoveLegal(moveToX,MoveToY,arrayPosX,arrayPosY)){
+
+      continue;
+    }
+    else{
+      posExists = false;
+    }
+  }
+
+
+  return posExists;
 
 }
