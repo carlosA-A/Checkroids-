@@ -15,7 +15,14 @@ using namespace std;
 int main() {
 
 
-	int board[8][8];
+Board* board = new Board();
+
+board ->populateBoard();
+
+
+
+
+/*	int board[8][8];
 	for (int spot = 0;  spot < 8; ++ spot) {
 			for (int cell = 0; cell < 8; ++ cell) {
 				board[spot][cell] = 0;
@@ -34,6 +41,7 @@ int main() {
 		cout<<endl;
 
 
-	}
+	}*/
+	
 	return 0;
 }

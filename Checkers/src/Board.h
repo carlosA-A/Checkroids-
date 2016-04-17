@@ -6,7 +6,7 @@ using namespace std;
 
 
 class Board{
-	
+	public:
 
 Piece* pieceArray[8][8];
 bool isWhite;
