@@ -18,10 +18,10 @@ int main() {
 Board* board = new Board();
 
 board ->populateBoard();
+while(true){
 board -> printBoard();
 board -> checkForMoves();
-board -> printBoard();
-
+}
 
 
 
