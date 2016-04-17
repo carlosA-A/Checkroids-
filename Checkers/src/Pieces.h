@@ -8,7 +8,8 @@ using namespace std;
 
 class Piece{
 
-	protected:
+	public:
+		
 		int move[2];  		//Where the piece is trying to move
 		int position[2];					// x and y coordinates of piece are stored in array
 		int destination[2];
@@ -17,17 +18,21 @@ class Piece{
 		int blackScore;
 		int whiteScore;
 		int countDeadPieces;
+		bool isLegal;
 		bool firstMoved;
 		bool didMove;  //Checks is the piece has already moved
+		bool exists;
 
-	public:
+
+		
 		Piece(){};
-		Piece(int positionX,int positionY, bool isWhite)
+		Piece(bool exists,int positionX,int positionY, bool isWhite)
 		{
 			this -> position[0] = positionX;
 			this -> position[1] = positionY;
 			this -> isWhite = isWhite;
-
+			this -> exists = exists;
+	
 
 		}
 		int* getPosition();
@@ -38,17 +43,23 @@ class Piece{
 		void setWhite(bool isWhite);
 		int getDead();		//Returns the number of dead pieces
 	 	void setDead();		//Returns true if piece has been destroyed
-		virtual bool isMoveLegal(int x, int y, int currentX, int currentY)=0;  //checks where piece is and wants to go, if move is legal return true
-		virtual bool getDidMove()=0;
+		virtual bool isMoveLegal(int x, int y, int currentX, int currentY){return isLegal;};  //checks where piece is and wants to go, if move is legal return true
+		
+		bool getDidMove();
 
 
 };
 class Normal: public Piece{
-	bool exists;
 
-	Normal(bool exists,int positionX, int positionY, bool isWhite):Piece(positionX,positionY,isWhite)
+public:
+	
+	
+
+	
+	Normal(bool exists,int positionX, int positionY, bool 
+	isWhite):Piece(exists,positionX,positionY,isWhite)
 	{
-		this->exists = exists;
+		
 	}
 	bool isMoveLegal(int x, int y, int currentX, int currentY);
 };

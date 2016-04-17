@@ -38,7 +38,7 @@ void Piece::setWhite(bool isWhite){
 
 bool Normal::isMoveLegal(int x, int y, int currentX, int currentY){
 
-  bool isLegal = false;
+  isLegal = false;
   move[0] = x;
   move[1] = y;
 
