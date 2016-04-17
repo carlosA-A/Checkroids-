@@ -238,6 +238,6 @@ bool Board::positionExists(int currentX, int currentY,int movingToX,int movingTo
 void Board::movePiece(int currentX, int currentY,int movingToX,int movingToY){
 
     pieceArray[movingToX][movingToY] = pieceArray[currentX][currentY];
-    pieceArray[currentX][currentY]->exists = false;
+    pieceArray[currentX][currentY] = new Normal (false,currentX,currentY,false);
 
 }

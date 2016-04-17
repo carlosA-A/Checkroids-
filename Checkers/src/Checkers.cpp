@@ -20,6 +20,8 @@ Board* board = new Board();
 board ->populateBoard();
 board -> printBoard();
 board -> checkForMoves();
+board -> printBoard();
+
 
 
 
