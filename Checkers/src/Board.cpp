@@ -164,7 +164,12 @@ void Board::movePiece(){
       cin>>chosenDestinationY;
       canContinue = positionExists(chosenPieceX,chosenPieceY,chosenDestinationX,chosenDestinationY);
     }
-
+	if(canContinue){
+		cout<<"Can continue"<<endl;
+		}
+		else{
+			cout<<"Can't continue"<<endl;
+			}
 
 }
 bool Board::position_Piece_Exist(int x, int y){
