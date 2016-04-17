@@ -148,7 +148,6 @@ void Board::checkForMoves(){
   int chosenDestinationX;
   int chosenDestinationY;
   bool canContinue = false;
-  isWhite = false;      //Blacks start
 
   cout<< "Which piece would you like to move?(w White,b Black)"<<endl;
   cout<< "Enter X coodinate"<<endl;
@@ -158,7 +157,7 @@ void Board::checkForMoves(){
   //Sets coordinates in terms of array
 	chosenPieceX--;
 	chosenPieceY--;
-  if(position_Piece_Exist(chosenPieceX,chosenPieceY)){
+  if(position_Piece_Exist(chosenPieceX,chosenPieceY,isWhite)){
     cout<< "Where would you like to move?(o Empty)"<<endl;
     cout<< "Enter X coodinate"<<endl;
     cin>>chosenDestinationX;
@@ -173,13 +172,21 @@ void Board::checkForMoves(){
   if(canContinue){
     cout<<"Can continue"<<endl;
     movePiece(chosenPieceX,chosenPieceY,chosenDestinationX,chosenDestinationY);
+    if(isWhite == false){
+		
+		isWhite = true;
+		}
+	else{
+		isWhite = false;
+		
+		}
   }
   else{
     cout<<"Can't continue"<<endl;
   }
 
 }
-bool Board::position_Piece_Exist(int x, int y){
+bool Board::position_Piece_Exist(int x, int y,bool colorPiece){
   bool posExists = true;
 	
 	
@@ -190,7 +197,7 @@ bool Board::position_Piece_Exist(int x, int y){
   }
   else{
     //Check if at position there exists a piece and is same color as player
-    if(pieceArray[x][y]-> exists == true && pieceArray[x][y]->isWhite == isWhite ){
+    if(pieceArray[x][y]-> exists == true && pieceArray[x][y]->isWhite == colorPiece ){
     }
     else{
       posExists = false;

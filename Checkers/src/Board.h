@@ -13,12 +13,18 @@ public:
   bool isWhite;
   bool pieceExists;   //Checks if piece in spot exists exists
   bool turnWhite ;  //Tracks players turn, blacks start
+  
+  Board(){
+	  //Blacks start
+	  isWhite = false;
+	  
+	  }
   void populateBoard();
   void printBoard();
   void movePiece(int currentX, int currentY,int movingToX,int movingToY);	//Moves piece inside of array
 	void checkForMoves();	//Takes in desired moves and checks if they are possible
   bool positionExists(int currentX, int currentY,int movingToX,int movingToY);
-  bool position_Piece_Exist(int x, int y);
+  bool position_Piece_Exist(int x, int y,bool colorPiece);
 
 
 };
