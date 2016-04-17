@@ -8,7 +8,7 @@ using namespace std;
 
 class Piece{
 
-	protected:
+	public:
 		
 		int move[2];  		//Where the piece is trying to move
 		int position[2];					// x and y coordinates of piece are stored in array
@@ -21,10 +21,9 @@ class Piece{
 		bool isLegal;
 		bool firstMoved;
 		bool didMove;  //Checks is the piece has already moved
-
-
-	public:
 		bool exists;
+
+
 		
 		Piece(){};
 		Piece(bool exists,int positionX,int positionY, bool isWhite)

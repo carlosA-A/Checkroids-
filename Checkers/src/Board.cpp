@@ -94,11 +94,14 @@ void Board::printBoard(){
 	for (int row = 0;  row < 8; ++ row) {
 		for (int column = 0; column < 8; ++ column) {
       
-      if(pieceArray[row][column]->exists == true){
-        cout <<  "x "<<"\t" ;
-      }else{
-        cout << "o"<<"\t" ;
+      if(pieceArray[row][column]->exists == true && pieceArray[row][column]->isWhite == true){
+        cout <<  "w "<<"\t" ;
+      }else if (pieceArray[row][column]->exists == true && pieceArray[row][column]->isWhite == false){
+        cout << "b"<<"\t" ;
       }
+      else{
+		  cout << "o"<<"\t" ;
+		  }
 
 
       if (column == 7) {
