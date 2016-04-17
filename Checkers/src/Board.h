@@ -11,9 +11,11 @@ public:
 
   Piece* pieceArray[8][8];
   bool isWhite;
-  bool pieceExists;
+  bool pieceExists;   //Checks if piece in spot exists exists
+  bool turnWhite;  //Tracks players turn, blacks start
   void populateBoard();
   void printBoard();
+  void movePiece();
 
 
 };

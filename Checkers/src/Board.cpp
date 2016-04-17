@@ -141,3 +141,26 @@ void Board::printBoard(){
   }
 
 }
+
+void Board::movePiece(){
+    int chosenPieceX;
+    int chosenPieceY;
+    int chosenDestinationX;
+    int chosenDestinationY;
+    turnWhite = false;
+
+    cout<< "Which piece would you like to move?(w White,b Black)"<<endl;
+    cout<< "Enter X coodinate"<<endl;
+    cin>>chosenPieceX;
+    cout<< "Enter Y coodinate"<<endl;
+    cin>>chosenPieceY;
+    if((chosenPieceX < 1 || chosenPieceX > 8)||(chosenPieceY < 1 || chosenPieceY > 8)){
+
+      std::cout << "Position doesn't exist" << std::endl;
+    }
+    else{
+      std::cout << "OK" << std::endl;
+    }
+
+
+}
