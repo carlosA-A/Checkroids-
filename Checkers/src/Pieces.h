@@ -17,6 +17,7 @@ class Piece{
 		int blackScore;
 		int whiteScore;
 		int countDeadPieces;
+		bool isLegal;
 		bool firstMoved;
 		bool didMove;  //Checks is the piece has already moved
 
@@ -38,14 +39,17 @@ class Piece{
 		void setWhite(bool isWhite);
 		int getDead();		//Returns the number of dead pieces
 	 	void setDead();		//Returns true if piece has been destroyed
-		virtual bool isMoveLegal(int x, int y, int currentX, int currentY)=0;  //checks where piece is and wants to go, if move is legal return true
-		virtual bool getDidMove()=0;
+		virtual bool isMoveLegal(int x, int y, int currentX, int currentY){return isLegal;};  //checks where piece is and wants to go, if move is legal return true
+		
+		bool getDidMove();
 
 
 };
 class Normal: public Piece{
-	bool exists;
 
+public:
+	bool exists;
+	
 	Normal(bool exists,int positionX, int positionY, bool isWhite):Piece(positionX,positionY,isWhite)
 	{
 		this->exists = exists;
