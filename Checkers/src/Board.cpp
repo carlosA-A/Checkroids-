@@ -192,10 +192,8 @@ bool Board::position_Piece_Exist(int x, int y){
   }
   else{
 	  cout<<"Works 3"<<endl;
-    int arrayPosX = x;   //-1 to find in array
-    int arrayPosY = y;
     //Check if at position there exists a piece and is same color as player
-    if(pieceArray[arrayPosX][arrayPosY]-> exists == true && pieceArray[arrayPosX][arrayPosY]->isWhite == isWhite ){
+    if(pieceArray[x][y]-> exists == true && pieceArray[x][y]->isWhite == isWhite ){
 	cout<<"Works 4"<<endl;
     }
     else{
@@ -221,14 +219,8 @@ bool Board::positionExists(int currentX, int currentY,int movingToX,int movingTo
   //Check if piece can move there
   else{
 	  cout<<"Works 7"<<endl;
-    //Current x y pos
-    int arrayPosX = currentX;   //-1 to find in array
-    int arrayPosY = currentY;
-    //Position trying to move to
-    int moveToX = movingToX ;
-    int moveToY = movingToY;
     //Checl if the move is legal and that there aren't any pieces in that same spot
-    if(pieceArray[arrayPosX][arrayPosY]->isMoveLegal(moveToX,moveToY,arrayPosX,arrayPosY)&&(pieceArray[moveToX][moveToY]->exists ==false)){
+    if(pieceArray[currentX][currentY]->isMoveLegal(movingToX,movingToY,currentX,currentY)&&(pieceArray[movingToX][movingToY]->exists ==false)){
 
     }
     else{
