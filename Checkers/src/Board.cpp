@@ -150,13 +150,13 @@ void Board::movePiece(){
     bool canContinue = false;
     isWhite = false;      //Blacks start
 
-    cout<< "Which piece would you like to move?(w White,b Black)"<<endl
-    cout<< "Enter X coodinate"<<endl
+    cout<< "Which piece would you like to move?(w White,b Black)"<<endl;
+    cout<< "Enter X coodinate"<<endl;
     cin>>chosenPieceX;
-    cout<< "Enter Y coodinate"<<endl
-    cin>>chosenPieceY
+    cout<< "Enter Y coodinate"<<endl;
+    cin>>chosenPieceY;
 
-    if(positionExists(chosenPieceX,chosenPieceY){
+    if(position_Piece_Exist(chosenPieceX,chosenPieceY)){
       cout<< "Where would you like to move?(o Empty)"<<endl;
       cout<< "Enter X coodinate"<<endl;
       cin>>chosenDestinationX;
@@ -179,8 +179,8 @@ bool Board::position_Piece_Exist(int x, int y){
     int arrayPosX = x-1;   //-1 to find in array
     int arrayPosY = y-1;
     //Check if at position there exists a piece and is same color as player
-    if(pieceArray[x][y]-> exist == true && pieceArray[x][y]->isWhite == isWhite){
-      continue;
+    if(pieceArray[arrayPosX][arrayPosY]-> exists == true && pieceArray[arrayPosX][arrayPosY]->isWhite == isWhite){
+      
     }
     else{
       posExists = false;
@@ -195,7 +195,7 @@ bool Board::position_Piece_Exist(int x, int y){
 bool Board::positionExists(int currentX, int currentY,int movingToX,int movingToY){
   bool posExists = true;
   //Check if pos exists
-  if((x < 1 || x > 8)&&(y < 1 || y > 8)){
+  if((movingToX < 1 || movingToX > 8)&&(movingToY < 1 || movingToY > 8)){
 
     std::cout << "Position doesn't exist" << std::endl;
     posExists = false;
@@ -211,7 +211,6 @@ bool Board::positionExists(int currentX, int currentY,int movingToX,int movingTo
 
     if(pieceArray[arrayPosX][arrayPosY]->isMoveLegal(moveToX,MoveToY,arrayPosX,arrayPosY)){
 
-      continue;
     }
     else{
       posExists = false;
