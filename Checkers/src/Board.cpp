@@ -184,8 +184,8 @@ bool Board::position_Piece_Exist(int x, int y){
     int arrayPosX = x-1;   //-1 to find in array
     int arrayPosY = y-1;
     //Check if at position there exists a piece and is same color as player
-    if(pieceArray[arrayPosX][arrayPosY]-> exists == true && pieceArray[arrayPosX][arrayPosY]->isWhite == isWhite){
-      
+    if(pieceArray[arrayPosX][arrayPosY]-> exists == true && pieceArray[arrayPosX][arrayPosY]->isWhite == isWhite ){
+
     }
     else{
       posExists = false;
@@ -213,8 +213,8 @@ bool Board::positionExists(int currentX, int currentY,int movingToX,int movingTo
     //Position trying to move to
     int moveToX = movingToX -1;
     int MoveToY = movingToY-1;
-
-    if(pieceArray[arrayPosX][arrayPosY]->isMoveLegal(moveToX,MoveToY,arrayPosX,arrayPosY)){
+    //Checl if the move is legal and that there aren't any pieces in that same spot
+    if(pieceArray[arrayPosX][arrayPosY]->isMoveLegal(moveToX,MoveToY,arrayPosX,arrayPosY)&&(pieceArray[moveToX][MoveToY]->exists ==false)){
 
     }
     else{
