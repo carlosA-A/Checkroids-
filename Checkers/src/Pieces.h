@@ -9,7 +9,7 @@ using namespace std;
 class Piece{
 
 	public:
-		
+
 		int move[2];  		//Where the piece is trying to move
 		int position[2];					// x and y coordinates of piece are stored in array
 		int destination[2];
@@ -32,7 +32,7 @@ class Piece{
 			this -> position[1] = positionY;
 			this -> isWhite = isWhite;
 			this -> exists = exists;
-	
+
 
 		}
 		int* getPosition();
@@ -44,7 +44,7 @@ class Piece{
 		int getDead();		//Returns the number of dead pieces
 	 	void setDead();		//Returns true if piece has been destroyed
 		virtual bool isMoveLegal(int x, int y, int currentX, int currentY){return isLegal;};  //checks where piece is and wants to go, if move is legal return true
-		
+
 		bool getDidMove();
 
 
@@ -52,14 +52,14 @@ class Piece{
 class Normal: public Piece{
 
 public:
-	
-	
 
-	
-	Normal(bool exists,int positionX, int positionY, bool 
+
+
+
+	Normal(bool exists,int positionX, int positionY, bool
 	isWhite):Piece(exists,positionX,positionY,isWhite)
 	{
-		
+
 	}
 	bool isMoveLegal(int x, int y, int currentX, int currentY);
 };

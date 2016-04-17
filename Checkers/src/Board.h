@@ -15,7 +15,8 @@ public:
   bool turnWhite ;  //Tracks players turn, blacks start
   void populateBoard();
   void printBoard();
-  void movePiece();
+  void movePiece(int currentX, int currentY,int movingToX,int movingToY);	//Moves piece inside of array
+	void checkForMoves();	//Takes in desired moves and checks if they are possible
   bool positionExists(int currentX, int currentY,int movingToX,int movingToY);
   bool position_Piece_Exist(int x, int y);
 

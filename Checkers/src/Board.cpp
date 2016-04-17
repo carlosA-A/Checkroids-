@@ -142,50 +142,61 @@ void Board::printBoard(){
 
 }
 
-void Board::movePiece(){
-    int chosenPieceX;
-    int chosenPieceY;
-    int chosenDestinationX;
-    int chosenDestinationY;
-    bool canContinue = false;
-    isWhite = false;      //Blacks start
+void Board::checkForMoves(){
+  int chosenPieceX;
+  int chosenPieceY;
+  int chosenDestinationX;
+  int chosenDestinationY;
+  bool canContinue = false;
+  isWhite = false;      //Blacks start
 
-    cout<< "Which piece would you like to move?(w White,b Black)"<<endl;
+  cout<< "Which piece would you like to move?(w White,b Black)"<<endl;
+  cout<< "Enter X coodinate"<<endl;
+  cin>>chosenPieceX;
+  cout<< "Enter Y coodinate"<<endl;
+  cin>>chosenPieceY;
+  //Sets coordinates in terms of array
+	chosenPieceX--;
+	chosenPieceY--;
+  if(position_Piece_Exist(chosenPieceX,chosenPieceY)){
+    cout<< "Where would you like to move?(o Empty)"<<endl;
     cout<< "Enter X coodinate"<<endl;
-    cin>>chosenPieceX;
+    cin>>chosenDestinationX;
     cout<< "Enter Y coodinate"<<endl;
-    cin>>chosenPieceY;
-
-    if(position_Piece_Exist(chosenPieceX,chosenPieceY)){
-      cout<< "Where would you like to move?(o Empty)"<<endl;
-      cout<< "Enter X coodinate"<<endl;
-      cin>>chosenDestinationX;
-      cout<< "Enter Y coodinate"<<endl;
-      cin>>chosenDestinationY;
-      canContinue = positionExists(chosenPieceX,chosenPieceY,chosenDestinationX,chosenDestinationY);
-    }
-	if(canContinue){
-		cout<<"Can continue"<<endl;
-		}
-		else{
-			cout<<"Can't continue"<<endl;
-			}
+    cin>>chosenDestinationY;
+    //Sets coordinates in terms of array
+    chosenDestinationX--;
+    chosenDestinationY--;
+    canContinue = positionExists(chosenPieceX,chosenPieceY,chosenDestinationX,chosenDestinationY);
+  }
+  //If all checks are true we can perform the move
+  if(canContinue){
+    cout<<"Can continue"<<endl;
+    movePiece(chosenPieceX,chosenPieceY,chosenDestinationX,chosenDestinationY);
+  }
+  else{
+    cout<<"Can't continue"<<endl;
+  }
 
 }
 bool Board::position_Piece_Exist(int x, int y){
   bool posExists = true;
-
-  if((x < 1 || x > 8)&&(y < 1 || y > 8)){
+	
+	cout<<"Works 1"<<endl;
+	
+  if((x < 0 || x > 7)&&(y < 0 || y > 7)){
+	  cout<<"Works 2"<<endl;
 
     std::cout << "Position doesn't exist" << std::endl;
     posExists = false;
   }
   else{
-    int arrayPosX = x-1;   //-1 to find in array
-    int arrayPosY = y-1;
+	  cout<<"Works 3"<<endl;
+    int arrayPosX = x;   //-1 to find in array
+    int arrayPosY = y;
     //Check if at position there exists a piece and is same color as player
     if(pieceArray[arrayPosX][arrayPosY]-> exists == true && pieceArray[arrayPosX][arrayPosY]->isWhite == isWhite ){
-
+	cout<<"Works 4"<<endl;
     }
     else{
       posExists = false;
@@ -197,32 +208,44 @@ bool Board::position_Piece_Exist(int x, int y){
   return posExists;
 
 }
+//Checks if the position the player wants to go to is accesible
 bool Board::positionExists(int currentX, int currentY,int movingToX,int movingToY){
   bool posExists = true;
+  cout<<"Works 5"<<endl;
   //Check if pos exists
-  if((movingToX < 1 || movingToX > 8)&&(movingToY < 1 || movingToY > 8)){
-
+  if((movingToX < 0 || movingToX > 7)&&(movingToY < 0 || movingToY > 7)){
+	cout<<"Works 6"<<endl;
     std::cout << "Position doesn't exist" << std::endl;
     posExists = false;
   }
   //Check if piece can move there
   else{
+	  cout<<"Works 7"<<endl;
     //Current x y pos
-    int arrayPosX = currentX-1;   //-1 to find in array
-    int arrayPosY = currentY-1;
+    int arrayPosX = currentX;   //-1 to find in array
+    int arrayPosY = currentY;
     //Position trying to move to
-    int moveToX = movingToX -1;
-    int MoveToY = movingToY-1;
+    int moveToX = movingToX ;
+    int moveToY = movingToY;
     //Checl if the move is legal and that there aren't any pieces in that same spot
-    if(pieceArray[arrayPosX][arrayPosY]->isMoveLegal(moveToX,MoveToY,arrayPosX,arrayPosY)&&(pieceArray[moveToX][MoveToY]->exists ==false)){
+    if(pieceArray[arrayPosX][arrayPosY]->isMoveLegal(moveToX,moveToY,arrayPosX,arrayPosY)&&(pieceArray[moveToX][moveToY]->exists ==false)){
 
     }
     else{
+		cout<<"Works 8"<<endl;
       posExists = false;
     }
   }
 
 
   return posExists;
+
+}
+
+
+void Board::movePiece(int currentX, int currentY,int movingToX,int movingToY){
+
+    pieceArray[movingToX][movingToY] = pieceArray[currentX][currentY];
+    pieceArray[currentX][currentY]->exists = false;
 
 }
