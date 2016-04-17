@@ -9,6 +9,7 @@ using namespace std;
 class Piece{
 
 	protected:
+		
 		int move[2];  		//Where the piece is trying to move
 		int position[2];					// x and y coordinates of piece are stored in array
 		int destination[2];
@@ -21,14 +22,18 @@ class Piece{
 		bool firstMoved;
 		bool didMove;  //Checks is the piece has already moved
 
+
 	public:
+		bool exists;
+		
 		Piece(){};
-		Piece(int positionX,int positionY, bool isWhite)
+		Piece(bool exists,int positionX,int positionY, bool isWhite)
 		{
 			this -> position[0] = positionX;
 			this -> position[1] = positionY;
 			this -> isWhite = isWhite;
-
+			this -> exists = exists;
+	
 
 		}
 		int* getPosition();
@@ -48,11 +53,14 @@ class Piece{
 class Normal: public Piece{
 
 public:
-	bool exists;
 	
-	Normal(bool exists,int positionX, int positionY, bool isWhite):Piece(positionX,positionY,isWhite)
+	
+
+	
+	Normal(bool exists,int positionX, int positionY, bool 
+	isWhite):Piece(exists,positionX,positionY,isWhite)
 	{
-		this->exists = exists;
+		
 	}
 	bool isMoveLegal(int x, int y, int currentX, int currentY);
 };

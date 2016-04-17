@@ -6,36 +6,17 @@ using namespace std;
 
 
 class Board{
-	public:
+public:
+	friend class Piece;
 
-Piece* pieceArray[8][8];
-bool isWhite;
-bool pieceExists;
-void populateBoard();
-void printBoard();
+  Piece* pieceArray[8][8];
+  bool isWhite;
+  bool pieceExists;
+  void populateBoard();
+  void printBoard();
 
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
