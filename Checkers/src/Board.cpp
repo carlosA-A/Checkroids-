@@ -91,27 +91,53 @@ void Board::populateBoard(){
 void Board::printBoard(){
 
 
-	for (int row = 0;  row < 8; ++ row) {
-		for (int column = 0; column < 8; ++ column) {
-      
+  for (int row = 0,columnIndex = 0,rowIndex = 1;  row < 8; ++ row) {
+
+    for (int column = 0; column < 8; ++ column) {
+
+      //Adds numbering for columns
+      while(columnIndex<9){
+        if(columnIndex==0){
+          cout <<  " " <<"\t";
+          columnIndex++;
+        }
+        else{
+          cout <<  columnIndex++ <<"\t";
+        }
+
+        if (columnIndex == 9) {
+          cout <<endl<<endl;
+        }
+      }
+      if(column == 0){
+
+        cout<<rowIndex++<<"\t";
+      }
+      //Prints out all the white pieces
       if(pieceArray[row][column]->exists == true && pieceArray[row][column]->isWhite == true){
+
         cout <<  "w "<<"\t" ;
-      }else if (pieceArray[row][column]->exists == true && pieceArray[row][column]->isWhite == false){
+      }
+      //Prints out all the black pieces
+      else if (pieceArray[row][column]->exists == true && pieceArray[row][column]->isWhite == false){
+
         cout << "b"<<"\t" ;
       }
+      //prints the spaces where movement is allowed
       else{
-		  cout << "o"<<"\t" ;
-		  }
+
+        cout << "o"<<"\t" ;
+      }
 
 
       if (column == 7) {
 
-				cout<<endl;
-			}
-		}
-		cout<<endl;
+        cout<<endl;
+      }
+    }
+    cout<<endl;
 
 
-	}
+  }
 
 }
