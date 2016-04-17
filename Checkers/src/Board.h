@@ -1,22 +1,25 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include <iostream>
+#include <string> 
 using namespace std;
 
-bool boardArray[8][8];
-
+bool blackTurn = true;
 
 
 class Board{
-	
-	friend class Pieces; 
+	friend class Piece; 
 	
 	public:
 		Board(){};
-		Pieces* pieceArray[24];
+		Piece* pieceArray[8][8];
 		
-		void setUpBoard();
-}
+		void setUpBoard(Piece* pieceArray[][8]);
+		void printBoard(Piece* pieceArray[][8]);
+		void turn(Piece* pieceArray[][8]);
+		void updateBoard(Piece* pieceArray[][8], int currentX, int currentY, int x, int y);
+};
 
 
 
