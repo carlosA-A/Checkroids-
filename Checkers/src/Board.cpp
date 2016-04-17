@@ -158,7 +158,13 @@ void Board::checkForMoves(){
   chosenPieceX--;
   chosenPieceY--;
   if(position_Piece_Exist(chosenPieceX,chosenPieceY,isWhite)){
-    checkJump(chosenPieceX,chosenPieceY);
+
+    if(checkJump(chosenPieceX,chosenPieceY)){
+
+      pieceArray[chosenPieceX][chosenPieceY]->pieceCanJump = true;
+
+    }
+
     cout<< "Where would you like to move?(o Empty)"<<endl;
     cout<< "Enter X coodinate"<<endl;
     cin>>chosenDestinationX;
@@ -173,6 +179,12 @@ void Board::checkForMoves(){
   if(canContinue){
     cout<<"Can continue"<<endl;
     movePiece(chosenPieceX,chosenPieceY,chosenDestinationX,chosenDestinationY);
+    //Check if piece jumped another piece during its turn
+    if(pieceArray[chosenDestinationX][chosenDestinationY]-> didJump == true){
+
+        //Have to remove the piece that was jumped
+
+    }
     if(isWhite == false){
 
       isWhite = true;
