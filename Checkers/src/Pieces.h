@@ -5,10 +5,16 @@
 #include <string>
 
 using namespace std;
+//there are 12 white and 12 black pieces, the count is reduced after a
+//piece dies and game ends when one reaches 0
+int whitePiecesLeft = 12;
+int blackPiecesLeft = 12;
 
 class Piece{
 
 	public:
+		friend class Board;
+
 
 		int move[2];  		//Where the piece is trying to move
 		int position[2];					// x and y coordinates of piece are stored in array
@@ -24,18 +30,16 @@ class Piece{
 		bool exists;
 		bool didJump;
 		bool pieceCanJump;
-		int whitePiecesLeft = 12;
-		int blackPiecesLeft = 12;
-
-
+		int type;	//Type 0 is normal, type 1 is King
 
 		Piece(){};
-		Piece(bool exists,int positionX,int positionY, bool isWhite)
+		Piece(bool exists,int positionX,int positionY, bool isWhite, int type)
 		{
 			this -> position[0] = positionX;
 			this -> position[1] = positionY;
 			this -> isWhite = isWhite;
 			this -> exists = exists;
+			this -> type = type;
 
 
 		}
@@ -60,8 +64,7 @@ public:
 
 
 
-	Normal(bool exists,int positionX, int positionY, bool
-	isWhite):Piece(exists,positionX,positionY,isWhite)
+	Normal(bool exists,int positionX, int positionY, bool isWhite,int type):Piece(exists,positionX,positionY,isWhite,type)
 	{
 
 	}
@@ -69,6 +72,12 @@ public:
 };
 
 class King: public Piece{
+	public:
+
+	King(bool exists,int positionX, int positionY, bool isWhite,int type):Piece(exists,positionX,positionY,isWhite,type)
+	{
+
+	}
 
 	bool isMoveLegal(int x, int y, int currentX, int currentY);
 

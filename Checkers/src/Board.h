@@ -13,6 +13,7 @@ public:
   bool isWhite;	//Tracks players turn, blacks start
   bool pieceExists;   //Checks if piece in spot exists exists
 
+
   Board(){
 	  //Blacks starts
 	  isWhite = false;
@@ -29,6 +30,8 @@ public:
 	bool checkJump(int currentX, int currentY,int &jumpedPieceX,int &jumpedPieceY1,int &jumpedPieceY2);
 	bool jumpPosition(int possibleX, int possibleY1,int possibleY2);	//Check if coordinates are possible
 	void jump(int possibleX, int possibleY1,int possibleY2 );			//Checks for possible coordinates of jumped piece
+	void upgradeToKing(int x, int y);	// Transforms normal piece into a King
+
 
 };
 

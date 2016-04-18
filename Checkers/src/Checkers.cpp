@@ -18,7 +18,9 @@ int main() {
 Board* board = new Board();
 
 board ->populateBoard();
-while(true){
+//While there are pieces left continue the game
+
+while(whitePiecesLeft > 0 && blackPiecesLeft > 0){
 board -> printBoard();
 board -> checkForMoves();
 }

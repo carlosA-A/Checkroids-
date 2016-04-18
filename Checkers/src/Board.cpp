@@ -18,12 +18,12 @@ void Board::populateBoard(){
             pieceExists = true;
             isWhite = true;
             //Defines a piece as existing, gives it coordinates and sets it to be white
-            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite);
+            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite,0);
           }
           //Spot in the board is empty
           else{
             pieceExists = false;
-            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite);
+            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite,0);
 
           }
         }
@@ -31,13 +31,13 @@ void Board::populateBoard(){
           if(column % 2 == 0){
             pieceExists = true;
             //Defines a piece as existing, gives it coordinates and sets it to be white
-            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite);
+            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite,0);
 
           }
           //Spot in the board is empty
           else{
             pieceExists = false;
-            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite);
+            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite,0);
 
           }
         }
@@ -50,14 +50,14 @@ void Board::populateBoard(){
             pieceExists = true;
             isWhite = false;
             //Defines a piece as existing, gives it coordinates and sets it to be black
-            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite);
+            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite,0);
 
 
           }
           else{
             pieceExists = false;
             //Defines a piece as existing, gives it coordinates and sets it to be black
-            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite);
+            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite,0);
 
           }
 
@@ -68,13 +68,13 @@ void Board::populateBoard(){
             pieceExists = true;
             isWhite = false;
             //Defines a piece as existing, gives it coordinates and sets it to be black
-            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite);
+            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite,0);
 
           }
           else{
             pieceExists = false;
             //Defines a piece as existing, gives it coordinates and sets it to be black
-            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite);
+            pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite,0);
 
 
           }
@@ -84,7 +84,7 @@ void Board::populateBoard(){
       else{
         pieceExists = false;
         //Defines a piece as existing, gives it coordinates and sets it to be black
-        pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite);
+        pieceArray[row][column] = new Normal (pieceExists,row,column,isWhite,0);
 
       }
     }
@@ -119,13 +119,28 @@ void Board::printBoard(){
       }
       //Prints out all the white pieces
       if(pieceArray[row][column]->exists == true && pieceArray[row][column]->isWhite == true){
+        //Check if piece is king
+        if(pieceArray[row][column]->type == 1){
 
-        cout <<  "w "<<"\t" ;
+          cout <<  "wK "<<"\t" ;
+        }
+        else{
+
+          cout <<  "w "<<"\t" ;
+        }
+
       }
       //Prints out all the black pieces
       else if (pieceArray[row][column]->exists == true && pieceArray[row][column]->isWhite == false){
 
-        cout << "b"<<"\t" ;
+        if(pieceArray[row][column]->type == 1){
+
+          cout << "bK"<<"\t" ;
+        }
+
+        else{cout << "b"<<"\t" ;
+      }
+
       }
       //prints the spaces where movement is allowed
       else{
@@ -180,8 +195,18 @@ void Board::checkForMoves(){
     movePiece(chosenPieceX,chosenPieceY,chosenDestinationX,chosenDestinationY);
     //Check if piece jumped another piece during its turn
     if(pieceArray[chosenDestinationX][chosenDestinationY]-> didJump == true){
+
+
       cout<<"Piece jumped"<<endl;
+      //If piece is black, find possible jumped piece
       if(!isWhite){
+        //Check if piece reached other side
+        if(chosenDestinationX == 0){
+
+            upgradeToKing(chosenDestinationX,chosenDestinationY);
+
+        }
+
         int destinationToDestroyX = chosenDestinationX+1; //X destination of piece to be dispossed
         int destinationDestryYL = chosenDestinationY -1; //Y destination of piece to dispose to the left
         int destinationDestryYR = chosenDestinationY + 1;//Y destination of piece to dispose to the right
@@ -209,13 +234,15 @@ void Board::checkForMoves(){
 
           }
 
-
-        //Still have to check if values are out of bounds or will get segmentation error
-
-
-
       }
+      //Find piece that white jumped
       else{
+        //If white reached other side change to king
+        if(chosenDestinationX == 7){
+
+            upgradeToKing(chosenDestinationX,chosenDestinationY);
+
+        }
 
         int destinationToDestroyX = chosenDestinationX - 1; //X destination of piece to be dispossed
         int destinationDestryYL = chosenDestinationY + 1; //Y destination of piece to dispose to the left
@@ -238,6 +265,19 @@ void Board::checkForMoves(){
         }
 
       }
+
+    }
+    //If move lands on other side of board upgrade To King
+    else if(isWhite && chosenDestinationX == 7){
+
+      upgradeToKing(chosenDestinationX,chosenDestinationY);
+
+
+    }
+    else if(!(isWhite) && chosenDestinationX == 0){
+
+      upgradeToKing(chosenDestinationX,chosenDestinationY);
+
 
     }
     if(isWhite == false){
@@ -307,7 +347,7 @@ bool Board::positionExists(int currentX, int currentY,int movingToX,int movingTo
 void Board::movePiece(int currentX, int currentY,int movingToX,int movingToY){
 
   pieceArray[movingToX][movingToY] = pieceArray[currentX][currentY];
-  pieceArray[currentX][currentY] = new Normal (false,currentX,currentY,false);
+  pieceArray[currentX][currentY] = new Normal (false,currentX,currentY,false,0);
 
 }
 //Checks the sorroundings of current piece to see if it is possible for it to jump
@@ -502,6 +542,11 @@ void Board::getDestinationCoordinates(int* destinationX, int* destinationY){
   stringstream convert4(y);
   convert4 >> *destinationY;
 
+}
+void Board::upgradeToKing(int x, int y){
+//creates a new king piece and replaces the normal piece in that position
+
+  pieceArray[x][y] = new King(true,x,y,isWhite,1);
 
 
 }
