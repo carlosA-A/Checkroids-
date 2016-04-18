@@ -41,6 +41,7 @@ bool Normal::isMoveLegal(int x, int y, int currentX, int currentY){
   isLegal = false;
   move[0] = x;
   move[1] = y;
+  didJump = false;
 
   int moveTo1 = -1;   //If the piece is black then the move will substract 1 to move forward
   int moveTo2 = -2;   //Jump will take 2 from the row
@@ -55,9 +56,12 @@ bool Normal::isMoveLegal(int x, int y, int currentX, int currentY){
     isLegal = true;
 
   }
-  else if ((currentX + moveTo2 == move[0])&&((currentY + moveTo1 == move[1])||(currentY - moveTo1 == move[1]))){
+  //checks if jump is legal
+  else if ((currentX + moveTo2 == move[0])&&((currentY + moveTo2 == move[1])||(currentY - moveTo2 == move[1]) || (currentY == move[1]))&&(pieceCanJump == true)){
 
     isLegal = true;
+    didJump = true;
+    pieceCanJump = false;
 
   }
 

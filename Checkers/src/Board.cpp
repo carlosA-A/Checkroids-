@@ -148,6 +148,9 @@ void Board::checkForMoves(){
   int chosenDestinationX;
   int chosenDestinationY;
   bool canContinue = false;
+  int jumpedPieceX = 0;
+  int jumpedPieceY1 = 0;
+  int jumpedPieceY2 = 0;
 
   cout<< "Which piece would you like to move?(w White,b Black)"<<endl;
   cout<< "Enter X coodinate"<<endl;
@@ -158,7 +161,13 @@ void Board::checkForMoves(){
   chosenPieceX--;
   chosenPieceY--;
   if(position_Piece_Exist(chosenPieceX,chosenPieceY,isWhite)){
-    checkJump(chosenPieceX,chosenPieceY);
+
+    if(checkJump(chosenPieceX,chosenPieceY,jumpedPieceX,jumpedPieceY1,jumpedPieceY2)){
+
+      pieceArray[chosenPieceX][chosenPieceY]->pieceCanJump = true;
+
+    }
+
     cout<< "Where would you like to move?(o Empty)"<<endl;
     cout<< "Enter X coodinate"<<endl;
     cin>>chosenDestinationX;
@@ -173,6 +182,68 @@ void Board::checkForMoves(){
   if(canContinue){
     cout<<"Can continue"<<endl;
     movePiece(chosenPieceX,chosenPieceY,chosenDestinationX,chosenDestinationY);
+    //Check if piece jumped another piece during its turn
+    if(pieceArray[chosenDestinationX][chosenDestinationY]-> didJump == true){
+      cout<<"Piece jumped"<<endl;
+      if(!isWhite){
+        int destinationToDestroyX = chosenDestinationX+1; //X destination of piece to be dispossed
+        int destinationDestryYL = chosenDestinationY -1; //Y destination of piece to dispose to the left
+        int destinationDestryYR = chosenDestinationY + 1;//Y destination of piece to dispose to the right
+        cout<<"Works 1"<<endl;
+
+          if(!((destinationToDestroyX<0 || destinationToDestroyX>8)&&(destinationDestryYR<0||destinationDestryYR>8))){
+            cout<<"Works 2"<<endl;
+
+            if((destinationToDestroyX == jumpedPieceX)&&(destinationDestryYR == jumpedPieceY1 ) ){
+              cout<<"Works 3"<<endl;
+              pieceArray[destinationToDestroyX][destinationDestryYR]-> setDead();
+              pieceArray[destinationToDestroyX][destinationDestryYR]-> exists = false;
+
+            }
+
+          }
+          if(!((destinationToDestroyX<0 || destinationToDestroyX>8) && (destinationDestryYL < 0 || destinationDestryYL > 8))){
+            cout<<"Works 4"<<endl;
+
+            if(destinationToDestroyX == jumpedPieceX && destinationDestryYL == jumpedPieceY2){
+             cout<<"Works 5"<<endl;
+             pieceArray[destinationToDestroyX][destinationDestryYL]-> setDead();
+             pieceArray[destinationToDestroyX][destinationDestryYL]-> exists = false;
+            }
+
+          }
+
+
+        //Still have to check if values are out of bounds or will get segmentation error
+
+
+
+      }
+      else{
+
+        int destinationToDestroyX = chosenDestinationX - 1; //X destination of piece to be dispossed
+        int destinationDestryYL = chosenDestinationY + 1; //Y destination of piece to dispose to the left
+        int destinationDestryYR = chosenDestinationY - 1;//Y destination of piece to dispose to the right
+        cout<<"Works 1"<<endl;
+        if(!((destinationToDestroyX<0 || destinationToDestroyX>8)&&(destinationDestryYR<0||destinationDestryYR>8))){
+          if((destinationToDestroyX == jumpedPieceX)&&(destinationDestryYR == jumpedPieceY1 ) ){
+            cout<<"Works 2"<<endl;
+            pieceArray[destinationToDestroyX][destinationDestryYR]-> setDead();
+            pieceArray[destinationToDestroyX][destinationDestryYR]-> exists = false;
+
+          }
+        }
+        if(!((destinationToDestroyX<0 || destinationToDestroyX>8) && (destinationDestryYL < 0 || destinationDestryYL > 8))){
+          if(destinationToDestroyX == jumpedPieceX && destinationDestryYL == jumpedPieceY2){
+            cout<<"Works 3"<<endl;
+            pieceArray[destinationToDestroyX][destinationDestryYL]-> setDead();
+            pieceArray[destinationToDestroyX][destinationDestryYL]-> exists = false;
+          }
+        }
+
+      }
+
+    }
     if(isWhite == false){
 
       isWhite = true;
@@ -244,7 +315,7 @@ void Board::movePiece(int currentX, int currentY,int movingToX,int movingToY){
 
 }
 //Checks the sorroundings of current piece to see if it is possible for it to jump
-bool Board::checkJump(int currentX, int currentY){
+bool Board::checkJump(int currentX, int currentY,int &jumpedPieceX,int &jumpedPieceY1,int &jumpedPieceY2){
   int opposingPiece = -1;
   bool canJump = false;
   int jumpX;
@@ -252,6 +323,8 @@ bool Board::checkJump(int currentX, int currentY){
   int possibleJumpY2;
   //Check if piece diagonally to the right exists
   if(isWhite){
+    std::cout << "Works 199" << std::endl;
+
     opposingPiece = abs(opposingPiece);
 
     //Check possible spots where there could be a piece to jump
@@ -263,28 +336,40 @@ bool Board::checkJump(int currentX, int currentY){
 
     }
     else{
-
+      std::cout << "Works 1" << std::endl;
       //Checks if there is a piece active and of the opposing color to be jumped
       if((pieceArray[jumpX][possibleJumpY1]->exists == true && pieceArray[jumpX][possibleJumpY1]->isWhite!=isWhite)){
+        std::cout << "Works 2" << std::endl;
+        //Sets place where the piece that is going to be jumped is
+        jumpedPieceX = jumpX;
+        jumpedPieceY1 = possibleJumpY1;
         //Check if there is a space available to jump to diagonally to the opposing piece
         jumpX = jumpX + opposingPiece;
         //Substracts one and goes left on possible arrival spot after jumping
         possibleJumpY1 = possibleJumpY1 + opposingPiece;
         //Check if position at futer spot exists
         if(!((jumpX<0 || jumpX>8)||(possibleJumpY1<0||possibleJumpY1>8))){
+          std::cout << "Works 3" << std::endl;
             //Check if position we want to jump to is empty
             if(pieceArray[jumpX][possibleJumpY1]->exists == false){
+              std::cout << "Works 4" << std::endl;
               canJump = true;
             }
         }
 
       }
       else if((pieceArray[jumpX][possibleJumpY2]->exists == true && pieceArray[jumpX][possibleJumpY2]->isWhite!=isWhite)){
+        std::cout << "Works 5" << std::endl;
+        jumpedPieceX = jumpX;
+        jumpedPieceY2 = possibleJumpY2;
+
         jumpX = jumpX + opposingPiece;
         possibleJumpY2 = possibleJumpY2 - opposingPiece;
         if(!((jumpX<0 || jumpX>8)||(possibleJumpY2<0||possibleJumpY2>8))){
+          std::cout << "Works 6" << std::endl;
             //Check if position we want to jump to is empty
             if(pieceArray[jumpX][possibleJumpY2]->exists == false){
+              std::cout << "Works 7" << std::endl;
               canJump = true;
             }
         }
@@ -295,7 +380,9 @@ bool Board::checkJump(int currentX, int currentY){
   }
   else{
     //Check possible spots where there could be a piece to jump
+    cout<<"current X value is: "<<currentX<<endl;
     jumpX = currentX + opposingPiece;
+    cout<<"current JumpX value is: "<<jumpX<<endl;
     //Piece could be to left or right
     possibleJumpY1 = currentY + opposingPiece;
     possibleJumpY2 = currentY - opposingPiece;
@@ -308,6 +395,9 @@ bool Board::checkJump(int currentX, int currentY){
     else{
       //Checks if there is a piece active and of the opposing color to be jumped
       if((pieceArray[jumpX][possibleJumpY1]->exists == true && pieceArray[jumpX][possibleJumpY1]->isWhite!=isWhite) ){
+
+          jumpedPieceX = jumpX;
+          jumpedPieceY1 = possibleJumpY1;
           //Check if there is a space available to jump to diagonally to the opposing piece
           jumpX = jumpX + opposingPiece;
           //Substracts one and goes left on possible arrival spot after jumping
@@ -323,6 +413,11 @@ bool Board::checkJump(int currentX, int currentY){
       }
       //Check if there is a piece to the right and if there is check if there is an empty spot to jump to
       else if((pieceArray[jumpX][possibleJumpY2]->exists == true && pieceArray[jumpX][possibleJumpY2]->isWhite!=isWhite)){
+          std::cout << "Check for jump" << std::endl;
+          std::cout << jumpX << std::endl;
+          std::cout << possibleJumpY2 << std::endl;
+          jumpedPieceX = jumpX;
+          jumpedPieceY2 = possibleJumpY2;
           jumpX = jumpX + opposingPiece;
           possibleJumpY2 = possibleJumpY2 - opposingPiece;
           if(!((jumpX<0 || jumpX>8)||(possibleJumpY2<0||possibleJumpY2>8))){
@@ -354,4 +449,8 @@ bool Board::jumpPosition(int possibleX, int possibleY1,int possibleY2){
   }
 
   return canExist;
+}
+void Board::jump(int possibleX, int possibleY1,int possibleY2){
+
+
 }

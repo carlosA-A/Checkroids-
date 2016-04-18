@@ -22,9 +22,11 @@ class Piece{
 		bool firstMoved;
 		bool didMove;  //Checks is the piece has already moved
 		bool exists;
+		bool didJump;
+		bool pieceCanJump;
 
 
-		
+
 		Piece(){};
 		Piece(bool exists,int positionX,int positionY, bool isWhite)
 		{
