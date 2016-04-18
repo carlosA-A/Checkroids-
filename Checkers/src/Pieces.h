@@ -24,6 +24,8 @@ class Piece{
 		bool exists;
 		bool didJump;
 		bool pieceCanJump;
+		int whitePiecesLeft = 12;
+		int blackPiecesLeft = 12;
 
 
 

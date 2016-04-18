@@ -28,6 +28,16 @@ void Piece::setPosition(int x, int y){
 
 void Piece::setDead(){
   this->dead = true;
+  if(isWhite){
+	  whitePiecesLeft--;
+	  cout<<"A white piece was lost, there are "<<whitePiecesLeft<<" left"<<endl;
+	  
+	  }
+  else{
+	  blackPiecesLeft--;
+	  	  cout<<"A black piece was lost, there are "<<blackPiecesLeft<<" left"<<endl;
+
+	  }
 }
 void Piece::setWhite(bool isWhite){
 
