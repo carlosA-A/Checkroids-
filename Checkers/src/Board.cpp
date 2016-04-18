@@ -191,19 +191,32 @@ void Board::checkForMoves(){
         int destinationDestryYR = chosenDestinationY + 1;//Y destination of piece to dispose to the right
         cout<<"Works 1"<<endl;
 
+          if(!((destinationToDestroyX<0 || destinationToDestroyX>8)&&(destinationDestryYR<0||destinationDestryYR>8))){
+            cout<<"Works 2"<<endl;
+
+            if((destinationToDestroyX == jumpedPieceX)&&(destinationDestryYR == jumpedPieceY1 ) ){
+              cout<<"Works 3"<<endl;
+              pieceArray[destinationToDestroyX][destinationDestryYR]-> setDead();
+              pieceArray[destinationToDestroyX][destinationDestryYR]-> exists = false;
+
+            }
+
+          }
+          if(!((destinationToDestroyX<0 || destinationToDestroyX>8) && (destinationDestryYL < 0 || destinationDestryYL > 8))){
+            cout<<"Works 4"<<endl;
+
+            if(destinationToDestroyX == jumpedPieceX && destinationDestryYL == jumpedPieceY2){
+             cout<<"Works 5"<<endl;
+             pieceArray[destinationToDestroyX][destinationDestryYL]-> setDead();
+             pieceArray[destinationToDestroyX][destinationDestryYL]-> exists = false;
+            }
+
+          }
+
 
         //Still have to check if values are out of bounds or will get segmentation error
-        if((destinationToDestroyX == jumpedPieceX)&&(destinationDestryYR == jumpedPieceY1 ) ){
-          cout<<"Works 2"<<endl;
-          pieceArray[destinationToDestroyX][destinationDestryYR]-> setDead();
-          pieceArray[destinationToDestroyX][destinationDestryYR]-> exists = false;
 
-        }
-        else if(destinationToDestroyX == jumpedPieceX && destinationDestryYL == jumpedPieceY2){
-          cout<<"Works 3"<<endl;
-          pieceArray[destinationToDestroyX][destinationDestryYL]-> setDead();
-          pieceArray[destinationToDestroyX][destinationDestryYL]-> exists = false;
-        }
+
 
       }
       else{
@@ -212,19 +225,20 @@ void Board::checkForMoves(){
         int destinationDestryYL = chosenDestinationY + 1; //Y destination of piece to dispose to the left
         int destinationDestryYR = chosenDestinationY - 1;//Y destination of piece to dispose to the right
         cout<<"Works 1"<<endl;
+        if(!((destinationToDestroyX<0 || destinationToDestroyX>8)&&(destinationDestryYR<0||destinationDestryYR>8))){
+          if((destinationToDestroyX == jumpedPieceX)&&(destinationDestryYR == jumpedPieceY1 ) ){
+            cout<<"Works 2"<<endl;
+            pieceArray[destinationToDestroyX][destinationDestryYR]-> setDead();
+            pieceArray[destinationToDestroyX][destinationDestryYR]-> exists = false;
 
-
-        //Still have to check if values are out of bounds or will get segmentation error
-        if((destinationToDestroyX == jumpedPieceX)&&(destinationDestryYR == jumpedPieceY1 ) ){
-          cout<<"Works 2"<<endl;
-          pieceArray[destinationToDestroyX][destinationDestryYR]-> setDead();
-          pieceArray[destinationToDestroyX][destinationDestryYR]-> exists = false;
-
+          }
         }
-        else if(destinationToDestroyX == jumpedPieceX && destinationDestryYL == jumpedPieceY2){
-          cout<<"Works 3"<<endl;
-          pieceArray[destinationToDestroyX][destinationDestryYL]-> setDead();
-          pieceArray[destinationToDestroyX][destinationDestryYL]-> exists = false;
+        if(!((destinationToDestroyX<0 || destinationToDestroyX>8) && (destinationDestryYL < 0 || destinationDestryYL > 8))){
+          if(destinationToDestroyX == jumpedPieceX && destinationDestryYL == jumpedPieceY2){
+            cout<<"Works 3"<<endl;
+            pieceArray[destinationToDestroyX][destinationDestryYL]-> setDead();
+            pieceArray[destinationToDestroyX][destinationDestryYL]-> exists = false;
+          }
         }
 
       }
