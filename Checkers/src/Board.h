@@ -18,6 +18,8 @@ public:
 	  isWhite = false;
 
 	  }
+		void getDestinationCoordinates(int* destinationX, int* destinationY);
+	void getPieceCoordinates(int* intcurrX, int* intcurrY);
 	void populateBoard();
 	void printBoard();
 	void movePiece(int currentX, int currentY,int movingToX,int movingToY);	//Moves piece inside of array

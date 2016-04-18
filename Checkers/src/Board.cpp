@@ -1,4 +1,8 @@
 #include "Board.h"
+#include <iostream>
+#include <string>
+#include <sstream>
+
 using namespace std;
 
 
@@ -152,11 +156,7 @@ void Board::checkForMoves(){
   int jumpedPieceY1 = 0;
   int jumpedPieceY2 = 0;
 
-  cout<< "Which piece would you like to move?(w White,b Black)"<<endl;
-  cout<< "Enter X coodinate"<<endl;
-  cin>>chosenPieceX;
-  cout<< "Enter Y coodinate"<<endl;
-  cin>>chosenPieceY;
+  getPieceCoordinates(&chosenPieceX,&chosenPieceY);
   //Sets coordinates in terms of array
   chosenPieceX--;
   chosenPieceY--;
@@ -168,11 +168,7 @@ void Board::checkForMoves(){
 
     }
 
-    cout<< "Where would you like to move?(o Empty)"<<endl;
-    cout<< "Enter X coodinate"<<endl;
-    cin>>chosenDestinationX;
-    cout<< "Enter Y coodinate"<<endl;
-    cin>>chosenDestinationY;
+    getDestinationCoordinates(&chosenDestinationX,&chosenDestinationY);
     //Sets coordinates in terms of array
     chosenDestinationX--;
     chosenDestinationY--;
@@ -451,6 +447,61 @@ bool Board::jumpPosition(int possibleX, int possibleY1,int possibleY2){
   return canExist;
 }
 void Board::jump(int possibleX, int possibleY1,int possibleY2){
+
+
+}
+
+void Board::getPieceCoordinates(int* intcurrX, int* intcurrY){
+
+string current;
+string currX;
+string currY;
+cout << "Input coordinates of piece to move ex: 1,1" << endl;
+cin >> current;
+
+for(int i = 0; i < current.size(); i++){
+  if(current[i] != ','){
+    currX += current[i];
+  }
+  else{
+    for(int j = i+1; j < current.size(); j++){
+      currY += current[j];
+    }
+    break;
+  }
+}
+stringstream convert1(currX);
+convert1 >> *intcurrX;
+
+stringstream convert2(currY);
+convert2 >> *intcurrY;
+
+
+}
+void Board::getDestinationCoordinates(int* destinationX, int* destinationY){
+  string target;
+  string x;
+	string y;
+  cout << "Input coordinates for were to go ex: 2,3" << endl;
+	cin >> target;
+
+  for(int i = 0; i < target.size(); i++){
+    if(target[i] != ','){
+      x += target[i];
+    }
+    else{
+      for(int j = i+1; j < target.size(); j++){
+        y += target[j];
+      }
+      break;
+    }
+  }
+  stringstream convert3(x);
+  convert3 >> *destinationX;
+
+  stringstream convert4(y);
+  convert4 >> *destinationY;
+
 
 
 }
