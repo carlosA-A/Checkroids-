@@ -28,7 +28,7 @@ public:
 	bool positionExists(int currentX, int currentY,int movingToX,int movingToY);
 	bool position_Piece_Exist(int x, int y,bool colorPiece);
 	bool checkJump(int currentX, int currentY,int &jumpedPieceX,int &jumpedPieceY1,int &jumpedPieceY2);
-	bool jumpPosition(int possibleX, int possibleY1,int possibleY2);	//Check if coordinates are possible
+	bool jumpPosition(int possibleX, int possibleY1,int possibleY2,bool &canUseY1,bool &canUseY2,int currentX,int currentY ,bool &kingUp,bool &kingDown);	//Check if coordinates are possible
 	void jump(int possibleX, int possibleY1,int possibleY2 );			//Checks for possible coordinates of jumped piece
 	void upgradeToKing(int x, int y);	// Transforms normal piece into a King
 
