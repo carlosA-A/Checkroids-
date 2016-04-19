@@ -457,6 +457,7 @@ void Board::movePiece(int currentX, int currentY,int movingToX,int movingToY){
 bool Board::checkJump(int currentX, int currentY,int &jumpedPieceX,int &jumpedPieceY1,int &jumpedPieceY2){
   int opposingPiece = -1;
   bool canJump = false;
+  bool canJumpDown = false;
   int jumpX;
   int possibleJumpY1;
   int possibleJumpY2;
@@ -551,6 +552,7 @@ bool Board::checkJump(int currentX, int currentY,int &jumpedPieceX,int &jumpedPi
 
 
     }
+    canJumpDown = canJump;
 
   }
   if(!isWhite || pieceArray[currentX][currentY]->type == 1){
@@ -572,7 +574,6 @@ bool Board::checkJump(int currentX, int currentY,int &jumpedPieceX,int &jumpedPi
     //Check if it's possible for a piece to exist in those coordinates
     if(jumpPosition(jumpX,possibleJumpY1,possibleJumpY2,canUseY1,canUseY2,currentX,currentY,kingUp,kingDown)==false){
       std::cout << "Works 9" << std::endl;
-
 
       canJump = false;
     }
@@ -669,6 +670,11 @@ bool Board::checkJump(int currentX, int currentY,int &jumpedPieceX,int &jumpedPi
       }
 
 
+
+    }
+
+    if(canJumpDown||canJump){
+      canJump = true;
 
     }
   }
