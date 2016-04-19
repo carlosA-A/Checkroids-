@@ -145,7 +145,7 @@ void Board::printBoard(){
     //prints the spaces where movement is allowed
     else{
 
-      cout << "o"<<"\t" ;
+      cout << "_"<<"\t" ;
     }
 
 
