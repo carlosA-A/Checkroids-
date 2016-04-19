@@ -29,15 +29,15 @@ void Piece::setPosition(int x, int y){
 void Piece::setDead(){
   this->dead = true;
   if(isWhite){
-	  whitePiecesLeft--;
-	  cout<<"A white piece was lost, there are "<<whitePiecesLeft<<" left"<<endl;
+    whitePiecesLeft--;
+    cout<<"A white piece was lost, there are "<<whitePiecesLeft<<" left"<<endl;
 
-	  }
+  }
   else{
-	  blackPiecesLeft--;
-	  	  cout<<"A black piece was lost, there are "<<blackPiecesLeft<<" left"<<endl;
+    blackPiecesLeft--;
+    cout<<"A black piece was lost, there are "<<blackPiecesLeft<<" left"<<endl;
 
-	  }
+  }
 }
 void Piece::setWhite(bool isWhite){
 
@@ -67,7 +67,6 @@ bool Normal::isMoveLegal(int x, int y, int currentX, int currentY){
 
   }
   //checks if jump is legal
-  //COULD BE A BUG!!!!!!!!!
   else if ((currentX + moveTo2 == move[0])&&((currentY + moveTo2 == move[1])||(currentY - moveTo2 == move[1]) || (currentY == move[1]))&&(pieceCanJump == true)){
 
     isLegal = true;

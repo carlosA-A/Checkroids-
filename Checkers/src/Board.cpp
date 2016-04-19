@@ -264,7 +264,7 @@ void Board::checkForMoves(){
 
       }
       //Find piece that white jumped
-       if (isWhite || pieceArray[chosenDestinationX][chosenDestinationY]->type ==1){
+      if (isWhite || pieceArray[chosenDestinationX][chosenDestinationY]->type ==1){
 
         //If white reached other side change to king
         if(chosenDestinationX == 7 && pieceArray[chosenDestinationX][chosenDestinationY]->type !=1){
@@ -298,17 +298,17 @@ void Board::checkForMoves(){
             if(pieceArray[destinationToDestroyX][destinationDestryYR]-> exists == true && pieceArray[destinationToDestroyX][destinationDestryYR]->isWhite != isWhite){
 
 
-            pieceArray[destinationToDestroyX][destinationDestryYR]-> setDead();
+              pieceArray[destinationToDestroyX][destinationDestryYR]-> setDead();
 
-            pieceArray[destinationToDestroyX][destinationDestryYR]-> exists = false;
+              pieceArray[destinationToDestroyX][destinationDestryYR]-> exists = false;
 
             }
           }
         }
         //Check spot actually exists in Board
 
-                if(!((destinationToDestroyX<0 || destinationToDestroyX>7)&&(destinationToDestroyX2<0 || destinationToDestroyX2>7) &&
-                (destinationDestryYL<0||destinationDestryYL>7) && (destinationDestryYR2<0||destinationDestryYR2>7))){
+        if(!((destinationToDestroyX<0 || destinationToDestroyX>7)&&(destinationToDestroyX2<0 || destinationToDestroyX2>7) &&
+        (destinationDestryYL<0||destinationDestryYL>7) && (destinationDestryYR2<0||destinationDestryYR2>7))){
 
 
           //If the destination of the piece jumped is found remove it
@@ -316,14 +316,14 @@ void Board::checkForMoves(){
 
             if(pieceArray[destinationToDestroyX][destinationDestryYL]-> exists == true && pieceArray[destinationToDestroyX][destinationDestryYL]->isWhite != isWhite){
 
-            pieceArray[destinationToDestroyX][destinationDestryYL]-> setDead();
+              pieceArray[destinationToDestroyX][destinationDestryYL]-> setDead();
 
-            pieceArray[destinationToDestroyX][destinationDestryYL]-> exists = false;
-          }
+              pieceArray[destinationToDestroyX][destinationDestryYL]-> exists = false;
+            }
           }
         }
 
-      /////////Check for another jump here
+        /////////Check for another jump here
         keepJumping = checkJump(chosenDestinationX,chosenDestinationY,jumpedPieceX,jumpedPieceY1,jumpedPieceY2);
 
       }
@@ -511,7 +511,7 @@ bool Board::checkJump(int currentX, int currentY,int &jumpedPieceX,int &jumpedPi
     kingDown = false;
 
 
-	  opposingPiece = -1;
+    opposingPiece = -1;
     //Check possible spots where there could be a piece to jump
     jumpX = currentX + opposingPiece;
     //Piece could be to left or right
@@ -603,135 +603,131 @@ bool Board::jumpPosition(int possibleX, int possibleY1,int possibleY2,bool &canU
 
 
 
-  bool canExist = false;
+    bool canExist = false;
 
 
-if(pieceArray[actualX][actualY]->type == 0){
-   if ((possibleY1<0||possibleY1>7) ){
-      canUseY1 = false;
+    if(pieceArray[actualX][actualY]->type == 0){
+      if ((possibleY1<0||possibleY1>7) ){
+        canUseY1 = false;
 
-    }
-   if((possibleY2 < 0 || possibleY2 > 7)){
-      canUseY2 = false;
-
-
-    }
-    if((canUseY1 || canUseY2) && ((possibleX<0 || possibleX>7) == false)){
-      canExist = true;
-
-    }
-}
-else{
-
-   if ((possibleY1<0||possibleY1>7) ){
-      canUseY1 = false;
-
-    }
-   if((possibleY2 < 0 || possibleY2 > 7)){
-      canUseY2 = false;
+      }
+      if((possibleY2 < 0 || possibleY2 > 7)){
+        canUseY2 = false;
 
 
-    }
-    if((canUseY1 || canUseY2) &&  ((possibleX>7) == false)){
-      canExist = true;
-      kingUp = true;
+      }
+      if((canUseY1 || canUseY2) && ((possibleX<0 || possibleX>7) == false)){
+        canExist = true;
 
-    }
-    if((canUseY1 || canUseY2) && ((possibleX<0) == false)){
-
-      canExist = true;
-      kingDown = true;
-    }
-
-}
-
-
-  return canExist;
-}
-void Board::jump(int possibleX, int possibleY1,int possibleY2){
-
-
-}
-
-void Board::getPieceCoordinates(int* intcurrX, int* intcurrY){
-
-  string current;
-  string currX;
-  string currY;
-
-//print out current player
-  if(isWhite){
-    std::cout << "White Piece ~ ";
-  }else{
-std::cout << "Black Piece ~ ";
-
-  }
-  cout << "Input coordinates of piece to move ex: 1,1" << endl;
-  cin >> current;
-
-  for(int i = 0; i < current.size(); i++){
-    if(current[i] != ','){
-      currX += current[i];
+      }
     }
     else{
-      for(int j = i+1; j < current.size(); j++){
-        currY += current[j];
+
+      if ((possibleY1<0||possibleY1>7) ){
+        canUseY1 = false;
+
       }
-      break;
-    }
-  }
-  stringstream convert1(currX);
-  convert1 >> *intcurrX;
-
-  stringstream convert2(currY);
-  convert2 >> *intcurrY;
-
-  //Check ascii range of values
-  if((*intcurrX + '0')< 48 || (*intcurrX + '0') > 57 || (*intcurrY+ '0') < 48 || (*intcurrY + '0') >57 ){
-
-	  *intcurrX = 0;
-	  *intcurrY = 0;
-
-	  }
+      if((possibleY2 < 0 || possibleY2 > 7)){
+        canUseY2 = false;
 
 
-}
-void Board::getDestinationCoordinates(int* destinationX, int* destinationY){
-  string target;
-  string x;
-  string y;
-  cout << "Input coordinates for were to go ex: 2,3" << endl;
-  cin >> target;
-
-  for(int i = 0; i < target.size(); i++){
-    if(target[i] != ','){
-      x += target[i];
-    }
-    else{
-      for(int j = i+1; j < target.size(); j++){
-        y += target[j];
       }
-      break;
+      if((canUseY1 || canUseY2) &&  ((possibleX>7) == false)){
+        canExist = true;
+        kingUp = true;
+
+      }
+      if((canUseY1 || canUseY2) && ((possibleX<0) == false)){
+
+        canExist = true;
+        kingDown = true;
+      }
+
     }
+
+
+    return canExist;
   }
-  stringstream convert3(x);
-  convert3 >> *destinationX;
 
-  stringstream convert4(y);
-  convert4 >> *destinationY;
+  void Board::getPieceCoordinates(int* intcurrX, int* intcurrY){
 
-   if((*destinationX + '0')< 48 || (*destinationX + '0') > 57 || (*destinationY+ '0') < 48 || (*destinationY + '0') >57 ){
+    string current;
+    string currX;
+    string currY;
 
-	  *destinationX = 0;
-	  *destinationY = 0;
+    //print out current player
+    if(isWhite){
+      std::cout << "White Piece ~ ";
+    }else{
+      std::cout << "Black Piece ~ ";
 
-	  }
+    }
+    cout << "Input coordinates of piece to move ex: 1,1" << endl;
+    cin >> current;
 
-}
-void Board::upgradeToKing(int x, int y){
-  //creates a new king piece and replaces the normal piece in that position
+    for(int i = 0; i < current.size(); i++){
+      if(current[i] != ','){
+        currX += current[i];
+      }
+      else{
+        for(int j = i+1; j < current.size(); j++){
+          currY += current[j];
+        }
+        break;
+      }
+    }
+    stringstream convert1(currX);
+    convert1 >> *intcurrX;
 
-  pieceArray[x][y] = new King(true,x,y,isWhite,1);
+    stringstream convert2(currY);
+    convert2 >> *intcurrY;
+
+    //Check ascii range of values
+    if((*intcurrX + '0')< 48 || (*intcurrX + '0') > 57 || (*intcurrY+ '0') < 48 || (*intcurrY + '0') >57 ){
+
+      *intcurrX = 0;
+      *intcurrY = 0;
+
+    }
 
 
-}
+  }
+  void Board::getDestinationCoordinates(int* destinationX, int* destinationY){
+    string target;
+    string x;
+    string y;
+    cout << "Input coordinates for were to go ex: 2,3" << endl;
+    cin >> target;
+
+    for(int i = 0; i < target.size(); i++){
+      if(target[i] != ','){
+        x += target[i];
+      }
+      else{
+        for(int j = i+1; j < target.size(); j++){
+          y += target[j];
+        }
+        break;
+      }
+    }
+    stringstream convert3(x);
+    convert3 >> *destinationX;
+
+    stringstream convert4(y);
+    convert4 >> *destinationY;
+
+    if((*destinationX + '0')< 48 || (*destinationX + '0') > 57 || (*destinationY+ '0') < 48 || (*destinationY + '0') >57 ){
+
+      *destinationX = 0;
+      *destinationY = 0;
+
+    }
+
+  }
+  void Board::upgradeToKing(int x, int y){
+    //creates a new king piece and replaces the normal piece in that position
+
+    pieceArray[x][y] = new King(true,x,y,isWhite,1);
+
+
+  }

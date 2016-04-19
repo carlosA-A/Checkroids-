@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//Create menu for game
 bool menu(){
 	int choice1, choice2, index;
 	bool cinError;
@@ -13,6 +14,7 @@ bool menu(){
 	string array[2074];
 	ifstream infile;
 
+//Read file with game instructions
 	infile.open("Instructions1.txt");
 
 	index = 0;
@@ -85,6 +87,7 @@ bool menu(){
 int main() {
 	bool begin;
 
+//create a new board
 	Board* board = new Board();
 
 	board ->populateBoard();
@@ -96,6 +99,7 @@ int main() {
 		board -> printBoard();
 		board -> checkForMoves();
 	}
+	//Determine winner based on the number of pieces left
 	if(whitePiecesLeft == 0 || blackPiecesLeft == 0 ){
 		board -> printBoard();
 
@@ -112,8 +116,6 @@ int main() {
 	}
 }
 
-/*	int board[8][8];
-	*/
 
 	return 0;
 }
