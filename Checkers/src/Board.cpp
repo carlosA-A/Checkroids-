@@ -658,6 +658,14 @@ void Board::getPieceCoordinates(int* intcurrX, int* intcurrY){
   string current;
   string currX;
   string currY;
+
+//print out current player
+  if(isWhite){
+    std::cout << "White Piece ~ ";
+  }else{
+std::cout << "Black Piece ~ ";
+
+  }
   cout << "Input coordinates of piece to move ex: 1,1" << endl;
   cin >> current;
 
