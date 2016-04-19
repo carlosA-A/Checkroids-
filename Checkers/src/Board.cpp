@@ -777,7 +777,15 @@ void Board::getPieceCoordinates(int* intcurrX, int* intcurrY){
 
   stringstream convert2(currY);
   convert2 >> *intcurrY;
-
+  
+  //Check ascii range of values
+  if((*intcurrX + '0')< 48 || (*intcurrX + '0') > 57 || (*intcurrY+ '0') < 48 || (*intcurrY + '0') >57 ){
+	  
+	  *intcurrX = 0;
+	  *intcurrY = 0;
+	  
+	  }
+ 
 
 }
 void Board::getDestinationCoordinates(int* destinationX, int* destinationY){
