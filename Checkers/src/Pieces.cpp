@@ -31,7 +31,7 @@ void Piece::setDead(){
   if(isWhite){
 	  whitePiecesLeft--;
 	  cout<<"A white piece was lost, there are "<<whitePiecesLeft<<" left"<<endl;
-	  
+
 	  }
   else{
 	  blackPiecesLeft--;
@@ -67,6 +67,7 @@ bool Normal::isMoveLegal(int x, int y, int currentX, int currentY){
 
   }
   //checks if jump is legal
+  //COULD BE A BUG!!!!!!!!!
   else if ((currentX + moveTo2 == move[0])&&((currentY + moveTo2 == move[1])||(currentY - moveTo2 == move[1]) || (currentY == move[1]))&&(pieceCanJump == true)){
 
     isLegal = true;
@@ -84,6 +85,8 @@ bool King::isMoveLegal(int x, int y, int currentX, int currentY){
   bool isLegal = false;
   move[0] = x;
   move[1] = y;
+  didJump = false;
+
 
   int moveTo1 = -1;   //If the piece is black then the move will substract 1 to move forward
   int moveTo2 = -2;   //Jump will take 2 from the row
@@ -94,9 +97,12 @@ bool King::isMoveLegal(int x, int y, int currentX, int currentY){
     isLegal = true;
 
   }
-  else if ((currentX + moveTo2 == move[0] || currentX - moveTo2 == move[0])&&((currentY + moveTo1 == move[1])||(currentY - moveTo1 == move[1]))){
+  else if ((currentX + moveTo2 == move[0] || currentX - moveTo2 == move[0])&&((currentY + moveTo2 == move[1])||(currentY - moveTo2 == move[1]))){
 
     isLegal = true;
+    didJump = true;
+    pieceCanJump = false;
+
 
   }
 
