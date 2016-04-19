@@ -126,7 +126,7 @@ void Board::printBoard(){
         }
         else{
 
-          cout <<  "W "<<"\t" ;
+          cout <<  "W"<<"\t" ;
         }
 
       }
@@ -135,17 +135,17 @@ void Board::printBoard(){
 
         if(pieceArray[row][column]->type == 1){
 
-          cout << "BK"<<"\t" ;
+          cout << "\033[30;1mBK\033[0m"<<"\t" ;
         }
 
-        else{cout << "B"<<"\t" ;
+        else{cout << "\033[30;1mB\033[0m"<<"\t" ;
       }
 
     }
     //prints the spaces where movement is allowed
     else{
 
-      cout << "_"<<"\t" ;
+      cout << "\033[1;31m_\033[0m"<<"\t" ;
     }
 
 
