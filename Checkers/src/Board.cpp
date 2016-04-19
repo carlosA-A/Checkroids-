@@ -200,7 +200,7 @@ void Board::checkForMoves(){
 
       cout<<"Piece jumped"<<endl;
       //If piece is black, find possible jumped piece
-      if(!isWhite){
+      if(!isWhite || pieceArray[chosenDestinationX][chosenDestinationY]->type ==1){
         //Check if piece reached other side
         if(chosenDestinationX == 0){
           std::cout << "Upgrade to King" << std::endl;
@@ -213,6 +213,7 @@ void Board::checkForMoves(){
         int destinationDestryYL = chosenDestinationY -1; //Y destination of piece to dispose to the left
         int destinationDestryYR = chosenDestinationY + 1;//Y destination of piece to dispose to the right
         cout<<"Works 1"<<endl;
+
 
         if(!((destinationToDestroyX<0 || destinationToDestroyX>7)&&(destinationDestryYR<0||destinationDestryYR>7))){
           cout<<"Works 2"<<endl;
@@ -247,7 +248,7 @@ void Board::checkForMoves(){
 
       }
       //Find piece that white jumped
-      else{
+       if (isWhite || pieceArray[chosenDestinationX][chosenDestinationY]->type ==1){
         //If white reached other side change to king
         if(chosenDestinationX == 7){
           std::cout << "Upgrade to King" << std::endl;
@@ -369,7 +370,7 @@ bool Board::positionExists(int currentX, int currentY,int movingToX,int movingTo
   //Check if piece can move there
   else{
     //Checl if the move is legal and that there aren't any pieces in that same spot
-    if(pieceArray[currentX][currentY]->isMoveLegal(movingToX,movingToY,currentX,currentY)&&(pieceArray[movingToX][movingToY]->exists ==false)){
+    if(pieceArray[currentX][currentY]->isMoveLegal(movingToX,movingToY,currentX,currentY)&&(pieceArray[movingToX][movingToY]->exists == false)){
 
     }
     else{
@@ -418,13 +419,13 @@ bool Board::checkJump(int currentX, int currentY,int &jumpedPieceX,int &jumpedPi
     possibleJumpY1 = currentY + opposingPiece;
     possibleJumpY2 = currentY - opposingPiece;
     //verifies if movement is possible as a normal piece and as king
-    
+
       std::cout << "Jump X: "<<jumpX << std::endl;
 
         std::cout << "possibleJumpY1: "<<possibleJumpY1 << std::endl;
 
         std::cout << "possibleJumpY2: "<<possibleJumpY2 << std::endl;
-        
+
     if(jumpPosition(jumpX,possibleJumpY1,possibleJumpY2,canUseY1,canUseY2,currentX,currentY,kingUp,kingDown) == false){
       std::cout << "Works 191" << std::endl;
 
@@ -490,7 +491,10 @@ bool Board::checkJump(int currentX, int currentY,int &jumpedPieceX,int &jumpedPi
 
   }
   if(!isWhite || pieceArray[currentX][currentY]->type == 1){
-	  
+    kingUp = false;
+    kingDown = false;
+
+
 	  opposingPiece = -1;
     //Check possible spots where there could be a piece to jump
     cout<<"current X value is: "<<currentX<<endl;
@@ -522,20 +526,20 @@ bool Board::checkJump(int currentX, int currentY,int &jumpedPieceX,int &jumpedPi
         std::cout << "possibleJumpY1: "<<possibleJumpY1 << std::endl;
 
         std::cout << "possibleJumpY2: "<<possibleJumpY2 << std::endl;
-        
+
         if(pieceArray[jumpX][possibleJumpY1]->exists == true){
-			
+
 			        std::cout << "fisrt part: " << std::endl;
 
 			}
-        
-        
+
+
        if( pieceArray[jumpX][possibleJumpY1]->isWhite != isWhite){
-		   
+
 		             std::cout << "second part: " << std::endl;
 
 		   }
-          
+
 
 
 
@@ -572,7 +576,7 @@ bool Board::checkJump(int currentX, int currentY,int &jumpedPieceX,int &jumpedPi
       }
 
       if((canUseY2==true) && ((pieceArray[currentX][currentY]->type == 1 && kingDown) || (pieceArray[currentX][currentY]->type == 0))){
-	
+
 		          std::cout << "Works 144444" << std::endl;
 
         //Check if there is a piece to the right and if there is check if there is an empty spot to jump to
