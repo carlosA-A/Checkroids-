@@ -665,12 +665,12 @@ bool Board::jumpPosition(int possibleX, int possibleY1,int possibleY2,bool &canU
     cout << "Input coordinates of piece to move ex: 1,1" << endl;
     cin >> current;
 
-    for(int i = 0; i < current.size(); i++){
+    for(unsigned int i = 0; i < current.size(); i++){
       if(current[i] != ','){
         currX += current[i];
       }
       else{
-        for(int j = i+1; j < current.size(); j++){
+        for(unsigned int j = i+1; j < current.size(); j++){
           currY += current[j];
         }
         break;
@@ -699,12 +699,12 @@ bool Board::jumpPosition(int possibleX, int possibleY1,int possibleY2,bool &canU
     cout << "Input coordinates for were to go ex: 2,3" << endl;
     cin >> target;
 
-    for(int i = 0; i < target.size(); i++){
+    for(unsigned int i = 0; i < target.size(); i++){
       if(target[i] != ','){
         x += target[i];
       }
       else{
-        for(int j = i+1; j < target.size(); j++){
+        for(unsigned int j = i+1; j < target.size(); j++){
           y += target[j];
         }
         break;
