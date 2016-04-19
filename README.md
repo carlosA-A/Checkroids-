@@ -1,5 +1,3 @@
-# Checkroids
-
 <h1>Checkeroids Report</h1>
 <i>Team #35: Sebastian Perez (Leader), Carlos Avogadro, Yazan Mansour, Jose Diaz, Leena Flood, Lauren Arfaras </i>
 
