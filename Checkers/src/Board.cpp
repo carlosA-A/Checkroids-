@@ -811,6 +811,13 @@ void Board::getDestinationCoordinates(int* destinationX, int* destinationY){
 
   stringstream convert4(y);
   convert4 >> *destinationY;
+  
+   if((*destinationX + '0')< 48 || (*destinationX + '0') > 57 || (*destinationY+ '0') < 48 || (*destinationY + '0') >57 ){
+	  
+	  *destinationX = 0;
+	  *destinationY = 0;
+	  
+	  }
 
 }
 void Board::upgradeToKing(int x, int y){
