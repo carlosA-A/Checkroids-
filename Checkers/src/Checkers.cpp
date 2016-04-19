@@ -80,8 +80,12 @@ bool menu(){
 		else if(choice1 == 3){
 			return false;
 		}
+		
 
 	}while(choice1 != 3);
+	
+	return false;
+	
 }
 
 int main() {
