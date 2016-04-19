@@ -122,11 +122,11 @@ void Board::printBoard(){
         //Check if piece is king
         if(pieceArray[row][column]->type == 1){
 
-          cout <<  "wK "<<"\t" ;
+          cout <<  "WK "<<"\t" ;
         }
         else{
 
-          cout <<  "w "<<"\t" ;
+          cout <<  "W "<<"\t" ;
         }
 
       }
@@ -135,10 +135,10 @@ void Board::printBoard(){
 
         if(pieceArray[row][column]->type == 1){
 
-          cout << "bK"<<"\t" ;
+          cout << "BK"<<"\t" ;
         }
 
-        else{cout << "b"<<"\t" ;
+        else{cout << "B"<<"\t" ;
       }
 
     }
@@ -171,6 +171,7 @@ void Board::checkForMoves(){
   int jumpedPieceY1 = 0;
   int jumpedPieceY2 = 0;
   bool keepJumping = false;
+  bool killedBefore = false;  //Checks to make sure jump only destroys one piece
 
   getPieceCoordinates(&chosenPieceX,&chosenPieceY);
   //Sets coordinates in terms of array
@@ -201,44 +202,76 @@ void Board::checkForMoves(){
       cout<<"Piece jumped"<<endl;
       //If piece is black, find possible jumped piece
       if(!isWhite || pieceArray[chosenDestinationX][chosenDestinationY]->type ==1){
+        cout<<"999"<<endl;
+
         //Check if piece reached other side
-        if(chosenDestinationX == 0){
+        if(chosenDestinationX == 0 && pieceArray[chosenDestinationX][chosenDestinationY]->type !=1 ){
           std::cout << "Upgrade to King" << std::endl;
 
           upgradeToKing(chosenDestinationX,chosenDestinationY);
 
         }
 
-        int destinationToDestroyX = chosenDestinationX+1; //X destination of piece to be dispossed
+        int destinationToDestroyX = chosenDestinationX + 1; //X destination of piece to be dispossed
+
         int destinationDestryYL = chosenDestinationY -1; //Y destination of piece to dispose to the left
+
         int destinationDestryYR = chosenDestinationY + 1;//Y destination of piece to dispose to the right
+
+        int destinationToDestroyX2 = chosenPieceX - 1;
+
+        int destinationDestryYL2 = chosenPieceY - 1;
+
+        int destinationDestryYR2 = chosenPieceY + 1;
+
         cout<<"Works 1"<<endl;
 
+        cout<<"destinationToDestroyX : "<<destinationToDestroyX<<endl;
+        cout<<"destinationDestryYL : "<<destinationDestryYL<<endl;
+        cout<<"destinationDestryYR : "<<destinationDestryYR<<endl;
+        cout<<"destinationToDestroyX2 : "<<destinationToDestroyX2<<endl;
+        cout<<"destinationDestryYL2 : "<<destinationDestryYL2<<endl;
+        cout<<"destinationDestryYR2 : "<<destinationDestryYR2<<endl;
 
-        if(!((destinationToDestroyX<0 || destinationToDestroyX>7)&&(destinationDestryYR<0||destinationDestryYR>7))){
+
+
+
+
+        if(!((destinationToDestroyX<0 || destinationToDestroyX>7)&&(destinationToDestroyX2<0 || destinationToDestroyX2>7) &&
+        (destinationDestryYR<0||destinationDestryYR>7) && (destinationDestryYL2<0||destinationDestryYL2>7))){
           cout<<"Works 2"<<endl;
 
-          if((destinationToDestroyX == jumpedPieceX)&&(destinationDestryYR == jumpedPieceY1 ) ){
+          if((destinationToDestroyX == destinationToDestroyX2)&&(destinationDestryYR == destinationDestryYL2 ) ){
             cout<<"Works 3"<<endl;
+            if(pieceArray[destinationToDestroyX][destinationDestryYR]-> exists == true && pieceArray[destinationToDestroyX][destinationDestryYR]->isWhite != isWhite ){
+              pieceArray[destinationToDestroyX][destinationDestryYR]-> setDead();
 
-            pieceArray[destinationToDestroyX][destinationDestryYR]-> setDead();
-
-            pieceArray[destinationToDestroyX][destinationDestryYR]-> exists = false;
+              pieceArray[destinationToDestroyX][destinationDestryYR]-> exists = false;
+            }
 
           }
 
         }
-        if(!((destinationToDestroyX<0 || destinationToDestroyX>7) && (destinationDestryYL < 0 || destinationDestryYL > 7))){
+        if(!((destinationToDestroyX<0 || destinationToDestroyX>7)&&(destinationToDestroyX2<0 || destinationToDestroyX2>7) &&
+        (destinationDestryYL<0||destinationDestryYL>7) && (destinationDestryYR2<0||destinationDestryYR2>7))){
 
           cout<<"Works 4"<<endl;
 
-          if(destinationToDestroyX == jumpedPieceX && destinationDestryYL == jumpedPieceY2){
+          if(destinationToDestroyX == destinationToDestroyX2 && destinationDestryYL == destinationDestryYR2){
 
             cout<<"Works 5"<<endl;
 
-            pieceArray[destinationToDestroyX][destinationDestryYL]-> setDead();
+            if(pieceArray[destinationToDestroyX][destinationDestryYL]-> exists == true && pieceArray[destinationToDestroyX][destinationDestryYL]->isWhite != isWhite){
+              cout<<"Works 6"<<endl;
 
-            pieceArray[destinationToDestroyX][destinationDestryYL]-> exists = false;
+
+              pieceArray[destinationToDestroyX][destinationDestryYL]-> setDead();
+
+              pieceArray[destinationToDestroyX][destinationDestryYL]-> exists = false;
+
+            }
+
+
           }
 
         }
@@ -249,46 +282,76 @@ void Board::checkForMoves(){
       }
       //Find piece that white jumped
        if (isWhite || pieceArray[chosenDestinationX][chosenDestinationY]->type ==1){
+         cout<<"777"<<endl;
+
         //If white reached other side change to king
-        if(chosenDestinationX == 7){
+        if(chosenDestinationX == 7 && pieceArray[chosenDestinationX][chosenDestinationY]->type !=1){
           std::cout << "Upgrade to King" << std::endl;
 
 
           upgradeToKing(chosenDestinationX,chosenDestinationY);
 
         }
-
+        //Compare coordinates from place we left and place we arrived to find what we jumped
         int destinationToDestroyX = chosenDestinationX - 1; //X destination of piece to be dispossed
 
-        int destinationDestryYL = chosenDestinationY + 1; //Y destination of piece to dispose to the left
+        int destinationDestryYR = chosenDestinationY + 1; //Y destination of piece to dispose to the right
 
-        int destinationDestryYR = chosenDestinationY - 1;//Y destination of piece to dispose to the right
+        int destinationDestryYL = chosenDestinationY - 1;//Y destination of piece to dispose to the left
+
+        int destinationToDestroyX2 = chosenPieceX + 1;
+
+        int destinationDestryYL2 = chosenPieceY - 1;
+
+        int destinationDestryYR2 = chosenPieceY + 1;
+
+        cout<<"destinationToDestroyX : "<<destinationToDestroyX<<endl;
+        cout<<"destinationDestryYL : "<<destinationDestryYL<<endl;
+        cout<<"destinationDestryYR : "<<destinationDestryYR<<endl;
+
+        cout<<"destinationToDestroyX2 : "<<destinationToDestroyX2<<endl;
+        cout<<"destinationDestryYL2 : "<<destinationDestryYL2<<endl;
+        cout<<"destinationDestryYR2 : "<<destinationDestryYR2<<endl;
+
+
 
         cout<<"Works 1"<<endl;
 
-        if(!((destinationToDestroyX<0 || destinationToDestroyX>7)&&(destinationDestryYR<0||destinationDestryYR>7))){
+        if(!((destinationToDestroyX<0 || destinationToDestroyX>7)&&(destinationToDestroyX2<0 || destinationToDestroyX2>7) &&
+        (destinationDestryYR<0||destinationDestryYR>7) && (destinationDestryYL2<0||destinationDestryYL2>7))){
 
-          if((destinationToDestroyX == jumpedPieceX)&&(destinationDestryYR == jumpedPieceY1 ) ){
+          if((destinationToDestroyX == destinationToDestroyX2)&&(destinationDestryYR == destinationDestryYL2 ) ){
 
             cout<<"Works 2"<<endl;
+            //Check that there exists a piece and that it's of the oppossing type
+            if(pieceArray[destinationToDestroyX][destinationDestryYR]-> exists == true && pieceArray[destinationToDestroyX][destinationDestryYR]->isWhite != isWhite){
+              cout<<"3"<<endl;
+
 
             pieceArray[destinationToDestroyX][destinationDestryYR]-> setDead();
 
             pieceArray[destinationToDestroyX][destinationDestryYR]-> exists = false;
 
+            }
           }
         }
         //Check spot actually exists in Board
-        if(!((destinationToDestroyX<0 || destinationToDestroyX > 7) && (destinationDestryYL < 0 || destinationDestryYL > 7))){
+
+                if(!((destinationToDestroyX<0 || destinationToDestroyX>7)&&(destinationToDestroyX2<0 || destinationToDestroyX2>7) &&
+                (destinationDestryYL<0||destinationDestryYL>7) && (destinationDestryYR2<0||destinationDestryYR2>7))){
+
+          cout<<"Works 4"<<endl;
 
           //If the destination of the piece jumped is found remove it
-          if(destinationToDestroyX == jumpedPieceX && destinationDestryYL == jumpedPieceY2){
+          if(destinationToDestroyX == destinationToDestroyX2 && destinationDestryYL == destinationDestryYR2){
 
-            cout<<"Works 3"<<endl;
+            cout<<"Works 5"<<endl;
+            if(pieceArray[destinationToDestroyX][destinationDestryYL]-> exists == true && pieceArray[destinationToDestroyX][destinationDestryYL]->isWhite != isWhite){
 
             pieceArray[destinationToDestroyX][destinationDestryYL]-> setDead();
 
             pieceArray[destinationToDestroyX][destinationDestryYL]-> exists = false;
+          }
           }
         }
 
@@ -300,13 +363,13 @@ void Board::checkForMoves(){
 
     }
     //If move lands on other side of board upgrade To King
-    else if(isWhite && chosenDestinationX == 7){
+    else if(isWhite && chosenDestinationX == 7 && pieceArray[chosenDestinationX][chosenDestinationY]->type !=1){
 
       upgradeToKing(chosenDestinationX,chosenDestinationY);
 
 
     }
-    else if(!(isWhite) && chosenDestinationX == 0){
+    else if(!(isWhite) && chosenDestinationX == 0 && pieceArray[chosenDestinationX][chosenDestinationY]->type !=1){
 
       upgradeToKing(chosenDestinationX,chosenDestinationY);
 
