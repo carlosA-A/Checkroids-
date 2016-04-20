@@ -662,7 +662,7 @@ bool Board::jumpPosition(int possibleX, int possibleY1,int possibleY2,bool &canU
       std::cout << "Black Piece ~ ";
 
     }
-    cout << "Input coordinates of piece to move ex: 1,1" << endl;
+    cout << "Input coordinates of piece to move ex: 6,1" << endl;
     cin >> current;
 
     for(unsigned int i = 0; i < current.size(); i++){
@@ -696,7 +696,7 @@ bool Board::jumpPosition(int possibleX, int possibleY1,int possibleY2,bool &canU
     string target;
     string x;
     string y;
-    cout << "Input coordinates for were to go ex: 2,3" << endl;
+    cout << "Input coordinates for were to go ex: 5,2" << endl;
     cin >> target;
 
     for(unsigned int i = 0; i < target.size(); i++){
